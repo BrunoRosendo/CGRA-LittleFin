@@ -34,7 +34,7 @@ export class MyScene extends CGFscene {
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.displayDiamond = false;
-    this.displayTriangle = true;
+    this.displayTriangle = false;
     this.displayParallelogram = true;
     this.scaleFactor = 1;
   }
