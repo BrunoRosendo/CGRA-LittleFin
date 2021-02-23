@@ -29,7 +29,13 @@ export class MyScene extends CGFscene {
 
     //Initialize scene objects
     this.axis = new CGFaxis(this);
-    this.diamond = new MyDiamond(this);
+    this.parallelogram = new MyParallelogram(this);
+    this.triangleUnder = new MyTriangle(this);
+    this.square = new MyDiamond(this);
+    this.triangleBesides = new MyTriangle(this);
+    this.mediumTriangle = new MyTriangleSmall(this);
+    this.bigTriangle = new MyTriangle(this);
+    this.roofTriangle = new MyTriangleSmall(this);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -92,45 +98,113 @@ export class MyScene extends CGFscene {
     ];
 
     this.multMatrix(sca);
+    this.pushMatrix();
 
-    // ---- BEGIN Object transformation section
+    // ---- BEGIN Transformation matrices section
 
-    // Matrix definitions (by order)
+    // Matrix definitions
 
     const matrixTranslate = [
       1, 0, 0, 0,
       0, 1, 0, 0,
       0, 0, 1, 0,
-      0, -1, 0, 1
+      0.5, -1, 0, 1
     ];
 
     const matrixScale = [
-      0.5, 0, 0, 0,
-      0, 1, 0, 0,
+      1/Math.sqrt(2), 0, 0, 0,
+      0, 1/Math.sqrt(2), 0, 0,
       0, 0, 1, 0,
       0, 0, 0, 1
     ];
 
-    const angle = 30*Math.PI/180;
-
-    const matrixRotate = [
-      Math.cos(angle), Math.sin(angle), 0, 0,
-      -Math.sin(angle), Math.cos(angle), 0, 0,
+    const angle1 = -45*Math.PI/180;
+    const matrixRotateZ = [
+      Math.cos(angle1), Math.sin(angle1), 0, 0,
+      -Math.sin(angle1), Math.cos(angle1), 0, 0,
       0, 0, 1, 0,
+      0, 0, 0, 1
+    ];
+
+    const matrixRotateX = [
+      1, 0, 0, 0,
+      0, Math.cos(Math.PI), Math.sin(Math.PI), 0,
+      0, -Math.sin(Math.PI), Math.cos(Math.PI), 0,
       0, 0, 0, 1
     ];
 
     // Transformations (by reversed order)
 
-    this.multMatrix(matrixRotate);
+    this.multMatrix(matrixRotateZ);
+    this.multMatrix(matrixRotateX);
     this.multMatrix(matrixScale);
-    this.multMatrix(matrixTranslate);
 
-    // ---- END Object transformation section
+    // ---- END Transformation matrices section
 
     // ---- BEGIN Primitive drawing section
 
-    this.diamond.display();
+    this.parallelogram.display();
+
+    this.popMatrix();
+    this.pushMatrix();
+
+    // Small triangle under parallelogram
+    this.translate(0.5, -1.5, 0);
+    this.scale(0.5, 0.5, 1);
+
+    this.triangleUnder.display();
+
+    this.popMatrix();
+    this.pushMatrix();
+
+    // Square
+    this.translate(-0.5, -1.5, 0);
+
+    this.scale(1/Math.sqrt(2), 1/Math.sqrt(2), 1);
+
+    const angSquare = 45*Math.PI/180;
+    this.rotate(angSquare, 0, 0, 1);
+
+    this.square.display();
+
+    this.popMatrix();
+    this.pushMatrix();
+
+    // Small triangle besides the parallelogram
+    this.translate(-0.5, -0.5, 0);
+    this.scale(0.5, 0.5, 1);
+    this.rotate(Math.PI/2, 0, 0, 1);
+
+    this.triangleBesides.display();
+
+    this.popMatrix();
+    this.pushMatrix();
+
+    // Medium triangle
+    this.translate(-1, 0, 0);
+    this.rotate(-Math.PI/2, 0, 0, 1);
+
+    this.mediumTriangle.display();
+
+    this.popMatrix();
+    this.pushMatrix();
+
+    // Big Triangle
+    this.rotate(Math.PI, 0, 0, 1);
+
+    this.bigTriangle.display();
+
+    this.popMatrix();
+    this.pushMatrix();
+
+    // Roof Triangle
+    this.translate(0, 1, 0);
+    this.scale(1.5, 1.5, 0);
+
+    this.roofTriangle.display();
+
+    this.popMatrix();
+    this.pushMatrix();
 
     // ---- END Primitive drawing section
   }
