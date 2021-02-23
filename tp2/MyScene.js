@@ -30,18 +30,9 @@ export class MyScene extends CGFscene {
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.diamond = new MyDiamond(this);
-    this.triangle = new MyTriangle(this);
-    this.parallelogram = new MyParallelogram(this);
-    this.triangleBig = new MyTriangleBig(this);
-    this.triangleSmall = new MyTriangleSmall(this);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
-    this.displayDiamond = false;
-    this.displayTriangle = false;
-    this.displayParallelogram = false;
-    this.displayTriangleBig = true;
-    this.displayTriangleSmall = false;
     this.scaleFactor = 1;
   }
   initLights() {
@@ -102,13 +93,44 @@ export class MyScene extends CGFscene {
 
     this.multMatrix(sca);
 
+    // ---- BEGIN Object transformation section
+
+    // Matrix definitions (by order)
+
+    const matrixTranslate = [
+      1, 0, 0, 0,
+      0, 1, 0, 0,
+      0, 0, 1, 0,
+      0, -1, 0, 1
+    ];
+
+    const matrixScale = [
+      0.5, 0, 0, 0,
+      0, 1, 0, 0,
+      0, 0, 1, 0,
+      0, 0, 0, 1
+    ];
+
+    const angle = 30*Math.PI/180;
+
+    const matrixRotate = [
+      Math.cos(angle), Math.sin(angle), 0, 0,
+      -Math.sin(angle), Math.cos(angle), 0, 0,
+      0, 0, 1, 0,
+      0, 0, 0, 1
+    ];
+
+    // Transformations (by reversed order)
+
+    this.multMatrix(matrixRotate);
+    this.multMatrix(matrixScale);
+    this.multMatrix(matrixTranslate);
+
+    // ---- END Object transformation section
+
     // ---- BEGIN Primitive drawing section
 
-    if (this.displayDiamond) this.diamond.display();
-    if (this.displayTriangle) this.triangle.display();
-    if (this.displayParallelogram) this.parallelogram.display();
-    if (this.displayTriangleBig) this.triangleBig.display();
-    if (this.displayTriangleSmall) this.triangleSmall.display();
+    this.diamond.display();
 
     // ---- END Primitive drawing section
   }
