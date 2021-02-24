@@ -3,6 +3,7 @@ import { MyDiamond } from "./MyDiamond.js";
 import { MyTriangle } from "./MyTriangle.js";
 import { MyParallelogram } from "./MyParallelogram.js"
 import { MyTriangleSmall } from "./MyTriangleSmall.js";
+import { toRads } from "./utils.js"
 
 /**
  * MyTangram
@@ -38,7 +39,7 @@ export class MyTangram extends CGFobject {
         0, 0, 0, 1
       ];
   
-      const angle1 = -45*Math.PI/180;
+      const angle1 = toRads(-45);
       const matrixRotateZ = [
         Math.cos(angle1), Math.sin(angle1), 0, 0,
         -Math.sin(angle1), Math.cos(angle1), 0, 0,
@@ -82,8 +83,7 @@ export class MyTangram extends CGFobject {
   
       this.scene.scale(1/Math.sqrt(2), 1/Math.sqrt(2), 1);
   
-      const angSquare = 45*Math.PI/180;
-      this.scene.rotate(angSquare, 0, 0, 1);
+      this.scene.rotate(toRads(45), 0, 0, 1);
   
       this.square.display();
   
@@ -93,7 +93,7 @@ export class MyTangram extends CGFobject {
       // Small triangle besides the parallelogram
       this.scene.translate(-0.5, -0.5, 0);
       this.scene.scale(0.5, 0.5, 1);
-      this.scene.rotate(Math.PI/2, 0, 0, 1);
+      this.scene.rotate(toRads(90), 0, 0, 1);
   
       this.triangleBesides.display();
   
@@ -102,7 +102,7 @@ export class MyTangram extends CGFobject {
   
       // Medium triangle
       this.scene.translate(-1, 0, 0);
-      this.scene.rotate(-Math.PI/2, 0, 0, 1);
+      this.scene.rotate(toRads(-90), 0, 0, 1);
   
       this.mediumTriangle.display();
   
