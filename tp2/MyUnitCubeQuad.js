@@ -1,5 +1,7 @@
-import {CGFobject} from '../lib/CGF.js';
+import { CGFobject } from '../lib/CGF.js';
 import { MyQuad } from "./MyQuad.js";
+import { toRads } from "./utils.js"
+
 
 /**
  * MyUnitCubeQuad
@@ -19,39 +21,45 @@ export class MyUnitCubeQuad extends CGFobject{
     display() {
         this.scene.pushMatrix();
 
+        // Top face
         this.scene.translate(0, 0, 0.5);
-        this.quad.display(); // front
-
-        this.scene.translate(0.5, 0, -0.5); // right side
-        this.scene.rotate(Math.PI/2, 0, 1, 0);
         this.quad.display();
 
-        this.scene.popMatrix();
-        this.scene.pushMatrix();
-        
-        this.scene.translate(-0.5, 0, 0); // left side
-        this.scene.rotate(-Math.PI/2, 0, 1, 0);
+        // Right face
+        this.scene.translate(0.5, 0, -0.5);
+        this.scene.rotate(toRads(90), 0, 1, 0);
         this.quad.display();
 
         this.scene.popMatrix();
         this.scene.pushMatrix();
 
-        this.scene.translate(0, 0, -0.5); // back
-        this.scene.rotate(Math.PI, 0, 1, 0);
+        // Left face
+        this.scene.translate(-0.5, 0, 0);
+        this.scene.rotate(toRads(-90), 0, 1, 0);
         this.quad.display();
 
         this.scene.popMatrix();
         this.scene.pushMatrix();
 
-        this.scene.translate(0, 0.5, 0); // top
-        this.scene.rotate(-Math.PI/2, 1, 0, 0);
+        // Back face
+        this.scene.translate(0, 0, -0.5);
+        this.scene.rotate(toRads(180), 0, 1, 0);
         this.quad.display();
 
         this.scene.popMatrix();
         this.scene.pushMatrix();
 
-        this.scene.translate(0, -0.5, 0); // bottom
-        this.scene.rotate(Math.PI/2, 1, 0, 0);
+        // Top face
+        this.scene.translate(0, 0.5, 0);
+        this.scene.rotate(toRads(-90), 1, 0, 0);
+        this.quad.display();
+
+        this.scene.popMatrix();
+        this.scene.pushMatrix();
+
+        // Bottom face
+        this.scene.translate(0, -0.5, 0);
+        this.scene.rotate(toRads(90), 1, 0, 0);
         this.quad.display();
     }
 }
