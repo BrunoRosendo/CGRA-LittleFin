@@ -1,6 +1,7 @@
 import { CGFscene, CGFcamera, CGFaxis } from "../lib/CGF.js";
 import { MyTangram } from "./MyTangram.js";
 import { MyUnitCube } from "./MyUnitCube.js";
+import { toRads } from "./utils.js";
 
 /**
  * MyScene
@@ -93,7 +94,7 @@ export class MyScene extends CGFscene {
 
     // Set the objets parallel to the XZ plan
     this.translate(1.5, 0, 2.5);
-    this.rotate(-Math.PI/2, 1, 0, 0);
+    this.rotate(toRads(-90), 1, 0, 0);
 
     this.pushMatrix();
 
