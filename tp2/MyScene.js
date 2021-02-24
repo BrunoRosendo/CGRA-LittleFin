@@ -27,7 +27,7 @@ export class MyScene extends CGFscene {
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.cube = new MyUnitCube(this);
-    //this.tangram = new MyTangram(this);
+    this.tangram = new MyTangram(this);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -67,7 +67,7 @@ export class MyScene extends CGFscene {
 
     // Draw axis
     if (this.displayAxis) this.axis.display();
-/*
+
     this.setDefaultAppearance();
 
     var sca = [
@@ -90,12 +90,23 @@ export class MyScene extends CGFscene {
     ];
 
     this.multMatrix(sca);
+
+    // Set the objets parallel to the XZ plan
+    this.translate(1.5, 0, 2.5);
+    this.rotate(-Math.PI/2, 1, 0, 0);
+
     this.pushMatrix();
 
     // ---- BEGIN Primitive drawing section
     this.tangram.display();
-    // ---- END Primitive drawing section
-    */
+
+    // start transforming the cube
+
+    this.translate(0, 0.25, -0.51); // put the cube behind the tangram
+    this.scale(3, 4.5, 1);          // and make it its base
+
     this.cube.display();
+
+    // ---- END Primitive drawing section
   }
 }
