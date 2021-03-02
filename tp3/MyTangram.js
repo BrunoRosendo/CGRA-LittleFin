@@ -63,6 +63,7 @@ export class MyTangram extends CGFobject {
   
       // ---- BEGIN Primitive drawing section
   
+      this.scene.scale(0.5,0.5,0.5);
       this.parallelogram.display();
   
       this.scene.popMatrix();
