@@ -12,69 +12,52 @@ import { MyTriangleSmall } from "./MyTriangleSmall.js";
 export class MyTangram extends CGFobject {
   constructor(scene) {
     super(scene);
-    this.initMaterials();
     this.init();
   }
 
-  // material1 = new CGFappearance(this);
-  // material1.setAmbient(1, 0, 0, 1.0);
-  // material1.setDiffuse(0, 0, 0, 1.0);
-  // material1.setSpecular(0, 0, 0, 1.0);
-  // material1.setShininess(10.0);
-
   initMaterials() {
 
-    //parallelogram (0.3 * 1.0, 1.0, 0.01, 1.0)
+    // Parallelogram Material (Yellow)
     this.materialParellelogram = new CGFappearance(this.scene);
-    this.materialParellelogram.setAmbient(0.3 * 1.0, 0.3 * 1.0, 0.3 * 0.01, 1.0);
-    this.materialParellelogram.setDiffuse(0.3 * 1.0, 0.3 * 1.0, 0.3 * 0.01, 1.0);
-    this.materialParellelogram.setSpecular(0.3 * 1.0, 0.3 * 1.0, 0.3 * 0.01, 1.0);
+    this.materialParellelogram.setAmbient(0.3, 0.3, 0.3 * 0.01, 1.0);
+    this.materialParellelogram.setDiffuse(0.3, 0.3, 0.3 * 0.01, 1.0);
+    this.materialParellelogram.setSpecular(1.0, 1.0, 0.01, 1.0);
     this.materialParellelogram.setShininess(1.0);
 
-
-    //triangleUnder (0.3*0.71,0.3*0.32,0.3*0.80, 1.0)
+    // Bottom Triangle Material (Purple)
     this.materialTriangleUnder = new CGFappearance(this.scene);
-    this.materialTriangleUnder.setAmbient(0.3 * 0.71, 0.3 * 0.32, 0.3 * 0.80, 1.0);
-    this.materialTriangleUnder.setDiffuse(0.3 * 0.71, 0.3 * 0.32, 0.3 * 0.80, 1.0);
-    this.materialTriangleUnder.setSpecular(0.3 * 0.71, 0.3 * 0.32, 0.3 * 0.80, 1.0);
+    this.materialTriangleUnder.setAmbient(0.3 * 0.58, 0.0, 0.3 * 0.83, 1.0);
+    this.materialTriangleUnder.setDiffuse(0.3 * 0.58, 0.0, 0.3 * 0.83, 1.0);
+    this.materialTriangleUnder.setSpecular(0.58, 0.0, 0.83, 1.0);
     this.materialTriangleUnder.setShininess(1.0);
 
-    //triangleBesides 0.3*(1.0.3*00,0.0.3*14,0, 1.0)
+    // Left Side Triangle Material (Red)
     this.materialTriangleBesides = new CGFappearance(this.scene);
-    this.materialTriangleBesides.setAmbient(0.3 * 1.00, 0.3 * 0.14, 0.3 * 0.0, 1.0);
-    this.materialTriangleBesides.setDiffuse(0.3 * 1.00, 0.3 * 0.14, 0.3 * 0.0, 1.0);
-    this.materialTriangleBesides.setSpecular(0.3 * 1.00, 0.3 * 0.14, 0.3 * 0.0, 1.0);
+    this.materialTriangleBesides.setAmbient(0.3, 0.0, 0.0, 1.0);
+    this.materialTriangleBesides.setDiffuse(0.3, 0.0, 0.0, 1.0);
+    this.materialTriangleBesides.setSpecular(1.00, 0.0, 0.0, 1.0);
     this.materialTriangleBesides.setShininess(1.0);
 
-    //mediumTriangle (0.3*0.93, 0.3*0.68, 0.3*0.93, 1.0)
+    // Medium Triangle Material (Pink)
     this.materialMediumTriangle = new CGFappearance(this.scene);
-    this.materialMediumTriangle.setAmbient(0.3 * 0.93, 0.3 * 0.68, 0.3 * 0.93, 1.0);
-    this.materialMediumTriangle.setDiffuse(0.3 * 0.93, 0.3 * 0.68, 0.3 * 0.93, 1.0);
-    this.materialMediumTriangle.setSpecular(0.3 * 0.93, 0.3 * 0.68, 0.3 * 0.93, 1.0);
+    this.materialMediumTriangle.setAmbient(0.3, 0.3 * 0.4, 0.3 * 0.55, 1.0);
+    this.materialMediumTriangle.setDiffuse(0.3, 0.3 * 0.4, 0.3 * 0.55, 1.0);
+    this.materialMediumTriangle.setSpecular(1.0, 0.4, 0.55, 1.0);
     this.materialMediumTriangle.setShininess(1.0);
 
-    //square (0.3*0.29, 0.3*0.89, 0.3*0.05, 1.0)
-    this.materialSquare = new CGFappearance(this.scene);
-    this.materialSquare.setAmbient(0.3 * 0.29, 0.3 * 0.89, 0.3 * 0.05, 1.0);
-    this.materialSquare.setDiffuse(0.3 * 0.29, 0.3 * 0.89, 0.3 * 0.05, 1.0);
-    this.materialSquare.setSpecular(0.3 * 0.29, 0.3 * 0.89, 0.3 * 0.05, 1.0);
-    this.materialSquare.setShininess(1.0);
-
-    //bigTriangle (0.3*1.00, 0.3*0.54, 0.3*0.0, 1.0)
+    // Big Triangle Material (Orange)
     this.materialBigTriangle = new CGFappearance(this.scene);
-    this.materialBigTriangle.setAmbient(0.3 * 1.00, 0.3 * 0.54, 0.3 * 0.0, 1.0);
-    this.materialBigTriangle.setDiffuse(0.3 * 1.00, 0.3 * 0.54, 0.3 * 0.0, 1.0);
-    this.materialBigTriangle.setSpecular(0.3 * 1.00, 0.3 * 0.54, 0.3 * 0.0, 1.0);
+    this.materialBigTriangle.setAmbient(0.3, 0.3 * 0.65, 0.0, 1.0);
+    this.materialBigTriangle.setDiffuse(0.3, 0.3 * 0.65, 0.0, 1.0);
+    this.materialBigTriangle.setSpecular(0.7, 0.4, 0.0, 1.0);
     this.materialBigTriangle.setShininess(1.0);
 
-    //roofTriangle (0.3*0.11, 0.3*0.53, 0.3*0.93, 1.0)
+    // Roof Triangle Material (Blue)
     this.materialRoofTriangle = new CGFappearance(this.scene);
-    this.materialRoofTriangle.setAmbient(0.3 * 0.11, 0.3 * 0.53, 0.3 * 0.93, 1.0);
-    this.materialRoofTriangle.setDiffuse(0.3 * 0.11, 0.3 * 0.53, 0.3 * 0.93, 1.0);
-    this.materialRoofTriangle.setSpecular(0.3 * 0.11, 0.3 * 0.53, 0.3 * 0.93, 1.0);
+    this.materialRoofTriangle.setAmbient(0.3 * 0.11, 0.3 * 0.4, 0.3 * 0.86, 1.0);
+    this.materialRoofTriangle.setDiffuse(0.3 * 0.11, 0.3 * 0.4, 0.3 * 0.86, 1.0);
+    this.materialRoofTriangle.setSpecular(0.11,  0.43, 0.93, 1.0);
     this.materialRoofTriangle.setShininess(1.0);
-
-
   }
 
   init() {
@@ -85,6 +68,7 @@ export class MyTangram extends CGFobject {
     this.mediumTriangle = new MyTriangleSmall(this.scene);
     this.bigTriangle = new MyTriangle(this.scene);
     this.roofTriangle = new MyTriangleSmall(this.scene);
+    this.initMaterials();
   }
 
   enableNormalViz() {
@@ -170,7 +154,6 @@ export class MyTangram extends CGFobject {
     const angSquare = 45 * Math.PI / 180;
     this.scene.rotate(angSquare, 0, 0, 1);
 
-    // this.materialSquare.apply();
     this.scene.customMaterial.apply();
     this.square.display();
 

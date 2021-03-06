@@ -77,44 +77,12 @@ export class MyUnitCube extends CGFobject {
             20,22,23,
         ];
 
-        this.normals = [
-
-            //front face
-            0,0,1, //0
-            0,0,1, //1
-            0,0,1, //2
-            0,0,1, //3
-
-            //left face
-            -1,0,0, //4
-            -1,0,0, //5
-            -1,0,0, //6
-            -1,0,0, //7
-
-            //back face
-            0,0,-1, //8
-            0,0,-1, //9
-            0,0,-1, //10
-            0,0,-1, //11
-
-            //right face
-            1,0,0, //12
-            1,0,0, //13
-            1,0,0, //14
-            1,0,0, //15
-
-            //top face
-            0,1,0, //16
-            0,1,0, //17
-            0,1,0, //18
-            0,1,0, //19
-
-            //bottom face
-            0,-1,0, //20
-            0,-1,0, //21
-            0,-1,0, //22
-            0,-1,0, //23
-        ]
+        this.normals = new Array(4).fill([0, 0, 1]).flat();
+        this.normals = this.normals.concat(new Array(4).fill([-1, 0, 0]).flat());
+        this.normals = this.normals.concat(new Array(4).fill([0, 0, -1]).flat());
+        this.normals = this.normals.concat(new Array(4).fill([1, 0, 0]).flat());
+        this.normals = this.normals.concat(new Array(4).fill([0, 1, 0]).flat());
+        this.normals = this.normals.concat(new Array(4).fill([0, -1, 0]).flat());
 
         //The defined indices (and corresponding vertices)
         //will be read in groups of three to draw triangles
