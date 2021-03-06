@@ -25,6 +25,26 @@ export class MyTangram extends CGFobject {
         this.roofTriangle = new MyTriangleSmall(this.scene);
     }
 
+    enableNormalViz(){
+      this.parallelogram.enableNormalViz();
+      this.triangleUnder.enableNormalViz();
+      this.square.enableNormalViz();
+      this.triangleBesides.enableNormalViz();
+      this.mediumTriangle.enableNormalViz();
+      this.bigTriangle.enableNormalViz();
+      this.roofTriangle.enableNormalViz();
+    }
+
+    disableNormalViz(){
+      this.parallelogram.disableNormalViz();
+      this.triangleUnder.disableNormalViz();
+      this.square.disableNormalViz();
+      this.triangleBesides.disableNormalViz();
+      this.mediumTriangle.disableNormalViz();
+      this.bigTriangle.disableNormalViz();
+      this.roofTriangle.disableNormalViz();
+    }
+
     display() {
 
     // ---- BEGIN Transformation matrices section

@@ -1,14 +1,14 @@
-import {CGFobject} from '../lib/CGF.js';
+import { CGFobject } from '../lib/CGF.js';
 /**
  * MyParallelogram
  * @constructor
  * @param scene - Reference to MyScene object
  */
 
- export class MyParallelogram extends CGFobject {
+export class MyParallelogram extends CGFobject {
     constructor(scene) {
         super(scene);
-		this.initBuffers();
+        this.initBuffers();
     }
 
     initBuffers() {
@@ -16,21 +16,45 @@ import {CGFobject} from '../lib/CGF.js';
             0, 0, 0, // 0
             2, 0, 0, // 1
             1, 1, 0, // 2
-            3, 1, 0  // 3
+            3, 1, 0,  // 3
+
+
+            0, 0, 0, // 4
+            2, 0, 0, // 5
+            1, 1, 0, // 6
+            3, 1, 0  // 7
         ];
 
         //Counter-clockwise reference of vertices
-        this.indices= [
-            0, 1, 3,
-            3, 1, 0,
-            0, 2, 3,
-            3, 2, 0
+        this.indices = [
+            0,1,3,
+            3,1,0,
+            0,3,2,
+            2,3,0,
+
+            4,5,7,
+            7,5,4,
+            4,7,6,
+            6,7,4
         ];
 
+
+        this.normals = [
+            0, 0, 1,
+            0, 0, 1,
+            0, 0, 1,
+            0, 0, 1,
+
+            0, 0, 1,
+            0, 0, 1,
+            0, 0, 1,
+            0, 0, 1,
+        ]
+
         //The defined indices (and corresponding vertices)
-		//will be read in groups of three to draw triangles
+        //will be read in groups of three to draw triangles
         this.primitiveType = this.scene.gl.TRIANGLES;
 
         this.initGLBuffers();
     }
- }
+}

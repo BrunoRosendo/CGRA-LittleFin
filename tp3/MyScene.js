@@ -41,10 +41,10 @@ export class MyScene extends CGFscene {
         this.objectIDs = { 'Plane': 0 , 'Pyramid': 1, 'Cone': 2, 'Tangram': 3, 'Cube': 4};
 
         //Other variables connected to MyInterface
-        this.selectedObject = 0;
-        this.selectedMaterial = 0;
+        this.selectedObject = 4;//
+        this.selectedMaterial = 1;//
         this.displayAxis = true;
-        this.displayNormals = false;
+        this.displayNormals = true;//
         this.objectComplexity = 0.5;
         this.scaleFactor = 2.0;
 
@@ -52,10 +52,12 @@ export class MyScene extends CGFscene {
     initLights() {
         this.setGlobalAmbientLight(0.3, 0.3, 0.3, 1.0);
 
-        this.lights[0].setPosition(2.0, 2.0, -1.0, 1.0);
+        // this.lights[0].setPosition(2.0, 2.0, -1.0, 1.0); //
+        this.lights[0].setPosition(2.0, 0.0,-1.0, 1.0); //
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
-        this.lights[0].disable();
+        this.lights[0].enable();
+        // this.lights[0].disable();
         this.lights[0].setVisible(true);
         this.lights[0].update();
 
