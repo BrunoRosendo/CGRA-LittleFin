@@ -41,10 +41,10 @@ export class MyScene extends CGFscene {
         this.objectIDs = { 'Plane': 0 , 'Pyramid': 1, 'Cone': 2, 'Tangram': 3, 'Cube': 4};
 
         //Other variables connected to MyInterface
-        this.selectedObject = 0;//
-        this.selectedMaterial = 0;//
+        this.selectedObject = 3;//
+        this.selectedMaterial = 0;
         this.displayAxis = true;
-        this.displayNormals = false;//
+        this.displayNormals = false;
         this.objectComplexity = 0.5;
         this.scaleFactor = 2.0;
 
@@ -55,14 +55,16 @@ export class MyScene extends CGFscene {
         this.lights[0].setPosition(2.0, 2.0, -1.0, 1.0);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
-        this.lights[0].disable();
+        this.lights[0].enable();//
+        // this.lights[0].disable();//
         this.lights[0].setVisible(true);
         this.lights[0].update();
 
         this.lights[1].setPosition(0.0, -1.0, 2.0, 1.0);
         this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[1].setSpecular(1.0, 1.0, 0.0, 1.0);
-        this.lights[1].disable();
+        // this.lights[1].enable();
+        this.lights[1].disable();//
         this.lights[1].setVisible(true);
         this.lights[1].update();
     }
@@ -141,15 +143,15 @@ export class MyScene extends CGFscene {
 
 
         //Wood material
-        this.woodmaterial = new CGFappearance(this);
-        this.woodmaterial.setAmbient(0.39, 0.27, 0.19, 1.0);
-        this.woodmaterial.setDiffuse(0.39, 0.27, 0.19, 1.0);
-        this.woodmaterial.setSpecular(0.039, 0.027, 0.019, 1.0);
-        this.woodmaterial.setShininess(0.01);
+        this.woodMaterial = new CGFappearance(this);
+        this.woodMaterial.setAmbient(0.39, 0.27, 0.19, 1.0);
+        this.woodMaterial.setDiffuse(0.39, 0.27, 0.19, 1.0);
+        this.woodMaterial.setSpecular(0.039, 0.027, 0.019, 1.0);
+        this.woodMaterial.setShininess(0.01);
 
         this.updateCustomMaterial();
 
-        this.materials = [this.material1, this.material2, this.material3, this.customMaterial, this.woodmaterial];
+        this.materials = [this.material1, this.material2, this.material3, this.customMaterial, this.woodMaterial];
 
         // Labels and ID's for object selection on MyInterface
         this.materialIDs = {'Red Ambient': 0, 'Red Diffuse': 1, 'Red Specular': 2, 'Custom': 3, 'Wood': 4 };
