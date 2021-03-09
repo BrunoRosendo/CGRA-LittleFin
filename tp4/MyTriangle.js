@@ -25,6 +25,12 @@ export class MyTriangle extends CGFobject {
 
         this.normals = new Array(3).fill([0, 0, 1]).flat();
 
+        this.texCoords = [
+			0.0, 0.5,
+            0.0, 1.0,
+            0.5, 1.0
+		];
+
         //The defined indices (and corresponding vertices)
         //will be read in groups of three to draw triangles
         this.primitiveType = this.scene.gl.TRIANGLES;
