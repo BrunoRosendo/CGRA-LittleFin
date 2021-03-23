@@ -4,22 +4,21 @@ attribute vec2 aTextureCoord;
 
 uniform mat4 uMVMatrix;
 uniform mat4 uPMatrix;
-uniform mat4 uNMatrix;
 uniform sampler2D uSampler2;
 uniform float timeFactor;
-uniform float normScale;
 
 varying vec2 vTextureCoord;
+varying vec2 newCoords;
 
 void main() {
-    vec2 offset = vec2(0.005*timeFactor, 0.005*timeFactor);
+    vec2 offset = mod((aTextureCoord + vec2(0.0001*timeFactor, 0.0001*timeFactor))/2.0, vec2(1.0, 1.0));
 
-    vec4 filter = texture2D(uSampler2, mod((vec2(0.0,0.1)+aTextureCoord + offset) / 2.0, vec2(1.0, 1.0)));
-    vec3 newPosition = aVertexPosition;
+    vec4 filter = texture2D(uSampler2, offset);
 
-    newPosition += 0.005*normScale*aVertexNormal*vec3(0.0, 0.0, filter.r);
+    vec3 newPosition = aVertexPosition + 0.05*aVertexNormal*vec3(0.0, 0.0, filter.r);
 	gl_Position = uPMatrix * uMVMatrix * vec4(newPosition, 1.0);
 
-	vTextureCoord = mod((vec2(0.0,0.1)+aTextureCoord + offset) / 2.0, vec2(1.0, 1.0));
+	vTextureCoord = aTextureCoord;
+    newCoords = offset;
 }
 
