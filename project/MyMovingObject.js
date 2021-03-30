@@ -2,10 +2,7 @@ export class MyMovingObject {
     constructor(scene, object) {
         this.scene = scene;
         this.object = object;
-
-        this.velocity = 0;
-        this.position = [0, 0, 0];
-        this.orientation = 0;
+        this.reset();
     }
     initBuffers() {
         this.object.initBuffers();
@@ -30,6 +27,12 @@ export class MyMovingObject {
 
     accelerate(val) {
         this.velocity += val;
+    }
+
+    reset() {
+        this.velocity = 0;
+        this.position = [0, 0, 0];
+        this.orientation = 0;
     }
 
     display() {
