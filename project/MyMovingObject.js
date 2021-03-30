@@ -1,11 +1,3 @@
-import { norm3d } from './utilities/vector.js';
-/**
-* MyPyramid
-* @constructor
- * @param scene - Reference to MyScene object
- * @param slices - number of divisions around the Y axis
- * @param stacks - number of divisions along the Y axis
-*/
 export class MyMovingObject {
     constructor(scene, object) {
         this.scene = scene;
@@ -13,7 +5,7 @@ export class MyMovingObject {
 
         this.velocity = 0;
         this.position = [0, 0, 0];
-        this.orientation = 0
+        this.orientation = 0;
     }
     initBuffers() {
         this.object.initBuffers();
@@ -26,26 +18,28 @@ export class MyMovingObject {
         this.object.updateBuffers(complexity);
     }
 
-    update(sceneSpeed) {
-        this.position[0] += Math.cos(this.orientation) * this.velocity;
-        this.position[1] += Math.sin(this.orientation) * this.velocity;
+    update() {
+        this.position[0] += Math.sin(this.orientation) * this.velocity;
+        this.position[2] += Math.cos(this.orientation) * this.velocity;
+        if (this.position[2] < 0) this.position[2] = 0; // z position is limited
     }
 
-    changeOrientation(angle) {
-        this.orientation += angle;
-        //see how this will work
+    turn(val) {
+        this.orientation += val;
     }
 
-    changeVelocity(change) {
-        this.velocity += change;
+    accelerate(val) {
+        this.velocity += val;
     }
 
     display() {
+        // Animate based on user input
         this.scene.translate(...this.position);
         this.scene.rotate(this.orientation, 0, 1, 0);
 
+        // Put the object in the right position. May change with the type of object
         this.scene.translate(0, 0, -0.5);
-        this.scene.rotate(Math.PI / 2, 1, 0, 0)
+        this.scene.rotate(Math.PI / 2, 1, 0, 0);
         this.object.display();
 
         this.scene.popMatrix();
