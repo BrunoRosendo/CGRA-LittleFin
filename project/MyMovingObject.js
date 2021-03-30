@@ -1,4 +1,4 @@
-import { norm3d } from './utilities/vector.js';
+import { norm3d, rotate3dByAxis } from './utilities/vector.js';
 /**
 * MyPyramid
 * @constructor
@@ -13,7 +13,7 @@ export class MyMovingObject {
 
         this.velocity = 0;
         this.position = [0, 0, 0];
-        this.orientation = [0, 0, 0];
+        this.orientation = 0
     }
     initBuffers() {
         this.object.initBuffers();
@@ -31,20 +31,21 @@ export class MyMovingObject {
         //division by norm grants unitary vector of orientation
     }
 
-    rotate(direction) {
+    changeOrientation(angle) {
+        this.orientation += angle;
         //see how this will work
     }
 
-    changeVelocity(change){
+    changeVelocity(change) {
         this.velocity += change;
     }
 
     display() {
-        // this.scene.translate(...this.position);
-        // this.scene.rotate(...this.orientation);
         this.scene.translate(...this.position);
-        this.scene.rotate(...this.orientation, 1);
+        this.scene.rotate(this.orientation, 0, 1, 0);
 
+        this.scene.translate(0, 0, -0.5);
+        this.scene.rotate(Math.PI / 2, 1, 0, 0)
         this.object.display();
 
         this.scene.popMatrix();
