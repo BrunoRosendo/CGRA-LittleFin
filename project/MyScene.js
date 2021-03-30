@@ -120,21 +120,30 @@ export class MyScene extends CGFscene {
     }
 
     checkKeys()  {
-        var text = "Keys pressed: ";
-        var keysPressed = false;
-
         // Check for key codes e.g. in https://keycode.info/
         if (this.gui.isKeyPressed("KeyW")) {
-                text += " W ";
-                keysPressed = true;
+            if (this.displayPyramid)
+                this.pyramid.accelerate(0.005);
         }
 
         if (this.gui.isKeyPressed("KeyS")) {
-                text += " S ";
-                keysPressed = true;
+            if (this.displayPyramid)
+                this.pyramid.accelerate(-0.005);
         }
 
-        if (keysPressed)
-                console.log(text);
+        if (this.gui.isKeyPressed("KeyA")) {
+            if (this.displayPyramid)
+                this.pyramid.turn(0.1);
+        }
+
+        if (this.gui.isKeyPressed("KeyD")) {
+            if (this.displayPyramid)
+                this.pyramid.turn(-0.1);
+        }
+
+        if (this.gui.isKeyPressed("KeyR")) {
+            if (this.displayPyramid)
+                this.pyramid.reset();
+        }
   }
 }

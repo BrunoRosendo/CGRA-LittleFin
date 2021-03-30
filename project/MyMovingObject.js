@@ -36,6 +36,7 @@ export class MyMovingObject {
     }
 
     display() {
+        this.update();
         // Animate based on user input
         this.scene.translate(...this.position);
         this.scene.rotate(this.orientation, 0, 1, 0);
