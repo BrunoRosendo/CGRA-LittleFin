@@ -1,4 +1,6 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance } from "../lib/CGF.js";
+import { MyMovingObject } from "./MyMovingObject.js"
+import { MyPyramid } from "./MyPyramid.js";
 import { MySphere } from "./MySphere.js";
 
 /**
@@ -23,29 +25,40 @@ export class MyScene extends CGFscene {
         this.gl.depthFunc(this.gl.LEQUAL);
 
         this.setUpdatePeriod(50);
-        
+
         this.enableTextures(true);
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.incompleteSphere = new MySphere(this, 16, 8);
+        this.pyramid = new MyMovingObject(this, new MyPyramid(this, 10, 3));
+
 
         this.defaultAppearance = new CGFappearance(this);
-		this.defaultAppearance.setAmbient(0.2, 0.4, 0.8, 1.0);
+        this.defaultAppearance.setAmbient(0.2, 0.4, 0.8, 1.0);
         this.defaultAppearance.setDiffuse(0.2, 0.4, 0.8, 1.0);
         this.defaultAppearance.setSpecular(0.2, 0.4, 0.8, 1.0);
-        this.defaultAppearance.setEmission(0,0,0,1);
-		this.defaultAppearance.setShininess(120);
+        this.defaultAppearance.setEmission(0, 0, 0, 1);
+        this.defaultAppearance.setShininess(120);
 
-		this.sphereAppearance = new CGFappearance(this);
-		this.sphereAppearance.setAmbient(0.3, 0.3, 0.3, 1);
-		this.sphereAppearance.setDiffuse(0.7, 0.7, 0.7, 1);
-		this.sphereAppearance.setSpecular(0.0, 0.0, 0.0, 1);
-		this.sphereAppearance.setShininess(120);
+
+        this.pyramidAppearance = new CGFappearance(this);
+        this.pyramidAppearance.setAmbient(0.3, 0.3, 0.3, 1);
+        this.pyramidAppearance.setDiffuse(0.7, 0.7, 0.7, 1);
+        this.pyramidAppearance.setSpecular(0.0, 0.0, 0.0, 1);
+        this.pyramidAppearance.setShininess(120);
+
+        this.sphereAppearance = new CGFappearance(this);
+        this.sphereAppearance.setAmbient(0.3, 0.3, 0.3, 1);
+        this.sphereAppearance.setDiffuse(0.7, 0.7, 0.7, 1);
+        this.sphereAppearance.setSpecular(0.0, 0.0, 0.0, 1);
+        this.sphereAppearance.setShininess(120);
 
 
         //Objects connected to MyInterface
         this.displayAxis = true;
+        this.displaySphere = false;
+        this.displayPyramid = true;
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -61,7 +74,7 @@ export class MyScene extends CGFscene {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
         this.setDiffuse(0.2, 0.4, 0.8, 1.0);
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
-        this.setEmission(0,0,0,1);
+        this.setEmission(0, 0, 0, 1);
         this.setShininess(10.0);
     }
 
@@ -80,38 +93,57 @@ export class MyScene extends CGFscene {
         this.loadIdentity();
         // Apply transformations corresponding to the camera position relative to the origin
         this.applyViewMatrix();
-        
-        
+
+        this.pushMatrix();
+
+
         this.defaultAppearance.apply();
         // Draw axis
         if (this.displayAxis)
             this.axis.display();
 
-        this.sphereAppearance.apply();
+
         // ---- BEGIN Primitive drawing section
+        if (this.displayPyramid) {
+            this.pyramidAppearance.apply();
+            this.pyramid.display();
+        }
+
 
         //This sphere does not have defined texture coordinates
-        this.incompleteSphere.display();
+        if (this.displaySphere) {
+            this.sphereAppearance.apply();
+            this.incompleteSphere.display();
+        }
 
         // ---- END Primitive drawing section
     }
 
     checkKeys()  {
-        var text = "Keys pressed: ";
-        var keysPressed = false;
-
         // Check for key codes e.g. in https://keycode.info/
         if (this.gui.isKeyPressed("KeyW")) {
-                text += " W ";
-                keysPressed = true;
+            if (this.displayPyramid)
+                this.pyramid.accelerate(0.005);
         }
 
         if (this.gui.isKeyPressed("KeyS")) {
-                text += " S ";
-                keysPressed = true;
+            if (this.displayPyramid)
+                this.pyramid.accelerate(-0.005);
         }
 
-        if (keysPressed)
-                console.log(text);
+        if (this.gui.isKeyPressed("KeyA")) {
+            if (this.displayPyramid)
+                this.pyramid.turn(0.1);
+        }
+
+        if (this.gui.isKeyPressed("KeyD")) {
+            if (this.displayPyramid)
+                this.pyramid.turn(-0.1);
+        }
+
+        if (this.gui.isKeyPressed("KeyR")) {
+            if (this.displayPyramid)
+                this.pyramid.reset();
+        }
   }
 }
