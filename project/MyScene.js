@@ -1,7 +1,8 @@
-import { CGFscene, CGFcamera, CGFaxis, CGFappearance } from "../lib/CGF.js";
+import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFtexture } from "../lib/CGF.js";
 import { MyMovingObject } from "./MyMovingObject.js"
 import { MyPyramid } from "./MyPyramid.js";
 import { MySphere } from "./MySphere.js";
+import { MyCubeMap } from "./MyCubeMap.js";
 
 /**
 * MyScene
@@ -28,10 +29,34 @@ export class MyScene extends CGFscene {
 
         this.enableTextures(true);
 
+        //MyCubeMap textures
+        this.skyTextures = [
+         new CGFtexture(this, './images/demo_cubemap/top.png'),
+         new CGFtexture(this, './images/demo_cubemap/front.png'),
+         new CGFtexture(this, './images/demo_cubemap/right.png'),
+         new CGFtexture(this, './images/demo_cubemap/back.png'),
+         new CGFtexture(this, './images/demo_cubemap/left.png'),
+         new CGFtexture(this, './images/demo_cubemap/bottom.png')
+        ];
+
+        this.otherTextures = [
+            new CGFtexture(this, './images/test_cubemap/py.png'),
+            new CGFtexture(this, './images/test_cubemap/pz.png'),
+            new CGFtexture(this, './images/test_cubemap/px.png'),
+            new CGFtexture(this, './images/test_cubemap/nz.png'),
+            new CGFtexture(this, './images/test_cubemap/nx.png'),
+            new CGFtexture(this, './images/test_cubemap/ny.png')
+        ];
+
+        this.textures = [this.otherTextures,this.skyTextures];
+        this.selectedTexture = 1;
+        this.textureIds = { 'Coords': 0, 'Sky': 1};
+
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.incompleteSphere = new MySphere(this, 16, 8);
         this.pyramid = new MyMovingObject(this, new MyPyramid(this, 10, 3));
+        this.mycubemap = new MyCubeMap(this, this.textures[this.selectedTexture]);
 
 
         this.defaultAppearance = new CGFappearance(this);
@@ -58,7 +83,8 @@ export class MyScene extends CGFscene {
         //Objects connected to MyInterface
         this.displayAxis = true;
         this.displaySphere = false;
-        this.displayPyramid = true;
+        this.displayPyramid = false;
+        this.displayMyCubeMap = true;
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -79,8 +105,12 @@ export class MyScene extends CGFscene {
     }
 
     // called periodically (as per setUpdatePeriod() in init())
-    update(t){
+    update(t) {
         this.checkKeys();
+    }
+
+    updateMyCubeMapTexture(){
+        this.mycubemap.updateAppliedTexture(this.textures[this.selectedTexture]);
     }
 
     display() {
@@ -116,10 +146,18 @@ export class MyScene extends CGFscene {
             this.incompleteSphere.display();
         }
 
+        if(this.displayMyCubeMap){
+            this.translate(this.camera.position[0],this.camera.position[1],this.camera.position[2]);
+            this.scale(50,50,50);
+            this.mycubemap.display();
+            this.pushMatrix();
+            this.popMatrix();
+        }
+
         // ---- END Primitive drawing section
     }
 
-    checkKeys()  {
+    checkKeys() {
         // Check for key codes e.g. in https://keycode.info/
         if (this.gui.isKeyPressed("KeyW")) {
             if (this.displayPyramid)
@@ -145,5 +183,6 @@ export class MyScene extends CGFscene {
             if (this.displayPyramid)
                 this.pyramid.reset();
         }
-  }
+
+    }
 }
