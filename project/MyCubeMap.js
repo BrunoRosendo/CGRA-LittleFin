@@ -10,14 +10,11 @@ import { toRads } from "./utils.js"
  */
 export class MyCubeMap extends CGFobject {
     constructor(scene, textures) {
-        if (textures.length > 6) {
-            textures = textures.slice(0, 6);
-        }
         super(scene);
-        this.init(...textures);
+        this.init(textures);
     }
 
-    init(top, front, right, back, left, bot) {
+    init(textures) {
         this.quad = new MyQuad(this.scene);
 
         this.material = new CGFappearance(this.scene);
@@ -25,7 +22,10 @@ export class MyCubeMap extends CGFobject {
         this.material.setDiffuse(0, 0, 0, 0);
         this.material.setSpecular(0, 0, 0, 0);
         this.material.setEmission(1, 1, 1, 1);
-        this.initTextures(top, front, right, back, left, bot);
+
+        this.initTextures(...textures);
+        // we don't need to check the number of textures because they are ignored (if exceeded)
+        // or undefined like they were with separate variables (if missing)
     }
 
     initTextures(top, front, right, back, left, bot) {
@@ -109,5 +109,8 @@ export class MyCubeMap extends CGFobject {
             this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
             this.quad.display();
         }
+
+        this.pushMatrix();
+        this.popMatrix();
     }
 }

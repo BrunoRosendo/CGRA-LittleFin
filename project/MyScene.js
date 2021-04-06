@@ -17,7 +17,7 @@ export class MyScene extends CGFscene {
         this.initCameras();
         this.initLights();
 
-        //Background color
+        // Background color
         this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
 
         this.gl.clearDepth(100.0);
@@ -29,17 +29,17 @@ export class MyScene extends CGFscene {
 
         this.enableTextures(true);
 
-        //MyCubeMap textures
+        // MyCubeMap textures
         this.skyTextures = [
-         new CGFtexture(this, './images/demo_cubemap/top.png'),
-         new CGFtexture(this, './images/demo_cubemap/front.png'),
-         new CGFtexture(this, './images/demo_cubemap/right.png'),
-         new CGFtexture(this, './images/demo_cubemap/back.png'),
-         new CGFtexture(this, './images/demo_cubemap/left.png'),
-         new CGFtexture(this, './images/demo_cubemap/bottom.png')
+            new CGFtexture(this, './images/demo_cubemap/top.png'),
+            new CGFtexture(this, './images/demo_cubemap/front.png'),
+            new CGFtexture(this, './images/demo_cubemap/right.png'),
+            new CGFtexture(this, './images/demo_cubemap/back.png'),
+            new CGFtexture(this, './images/demo_cubemap/left.png'),
+            new CGFtexture(this, './images/demo_cubemap/bottom.png')
         ];
 
-        this.otherTextures = [
+        this.coordTextures = [
             new CGFtexture(this, './images/test_cubemap/py.png'),
             new CGFtexture(this, './images/test_cubemap/pz.png'),
             new CGFtexture(this, './images/test_cubemap/px.png'),
@@ -48,15 +48,15 @@ export class MyScene extends CGFscene {
             new CGFtexture(this, './images/test_cubemap/ny.png')
         ];
 
-        this.textures = [this.otherTextures,this.skyTextures];
+        this.cubeMaptextures = [this.coordTextures, this.skyTextures];
         this.selectedTexture = 1;
         this.textureIds = { 'Coords': 0, 'Sky': 1};
 
-        //Initialize scene objects
+        // Initialize scene objects
         this.axis = new CGFaxis(this);
         this.incompleteSphere = new MySphere(this, 16, 8);
         this.pyramid = new MyMovingObject(this, new MyPyramid(this, 10, 3));
-        this.mycubemap = new MyCubeMap(this, this.textures[this.selectedTexture]);
+        this.mycubemap = new MyCubeMap(this, this.cubeMaptextures[this.selectedTexture]);
 
 
         this.defaultAppearance = new CGFappearance(this);
@@ -80,7 +80,7 @@ export class MyScene extends CGFscene {
         this.sphereAppearance.setShininess(120);
 
 
-        //Objects connected to MyInterface
+        // Objects connected to MyInterface
         this.displayAxis = true;
         this.displaySphere = false;
         this.displayPyramid = false;
@@ -109,8 +109,8 @@ export class MyScene extends CGFscene {
         this.checkKeys();
     }
 
-    updateMyCubeMapTexture(){
-        this.mycubemap.updateAppliedTexture(this.textures[this.selectedTexture]);
+    updateMyCubeMapTexture() {
+        this.mycubemap.updateAppliedTexture(this.cubeMaptextures[this.selectedTexture]);
     }
 
     display() {
@@ -140,18 +140,16 @@ export class MyScene extends CGFscene {
         }
 
 
-        //This sphere does not have defined texture coordinates
+        // This sphere does not have defined texture coordinates
         if (this.displaySphere) {
             this.sphereAppearance.apply();
             this.incompleteSphere.display();
         }
 
-        if(this.displayMyCubeMap){
+        if (this.displayMyCubeMap) {
             this.translate(this.camera.position[0],this.camera.position[1],this.camera.position[2]);
             this.scale(50,50,50);
             this.mycubemap.display();
-            this.pushMatrix();
-            this.popMatrix();
         }
 
         // ---- END Primitive drawing section
