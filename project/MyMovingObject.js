@@ -18,7 +18,6 @@ export class MyMovingObject {
     update() {
         this.position[0] += Math.sin(this.orientation) * this.velocity;
         this.position[2] += Math.cos(this.orientation) * this.velocity;
-        if (this.position[2] < 0) this.position[2] = 0; // z position is limited
     }
 
     turn(val) {
