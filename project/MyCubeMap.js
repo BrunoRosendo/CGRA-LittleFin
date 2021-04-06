@@ -1,6 +1,6 @@
 import { CGFappearance, CGFobject, CGFtexture } from '../lib/CGF.js';
 import { MyQuad } from "./MyQuad.js";
-import { toRads } from "./utils.js"
+import { toRads } from "./utilities/algebra.js"
 
 
 /**
@@ -110,7 +110,7 @@ export class MyCubeMap extends CGFobject {
             this.quad.display();
         }
 
-        this.pushMatrix();
-        this.popMatrix();
+        this.scene.pushMatrix();
+        this.scene.popMatrix();
     }
 }
