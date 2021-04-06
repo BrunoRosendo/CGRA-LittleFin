@@ -45,10 +45,10 @@ export class MyCubeMap extends CGFobject {
         this.scene.pushMatrix();
         this.material.apply();
 
-        // Back face
+        // Front face
         this.scene.translate(0, 0, -0.5);
-        if (this.backTexture) { // apply texture and display quad if defined
-            this.backTexture.bind();
+        if (this.frontTexture) { // apply texture and display quad if defined
+            this.frontTexture.bind();
             this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
             this.quad.display();
         }
@@ -77,11 +77,11 @@ export class MyCubeMap extends CGFobject {
         this.scene.popMatrix();
         this.scene.pushMatrix();
 
-        // Front face
+        // Back face
         this.scene.translate(0, 0, 0.5);
         this.scene.rotate(toRads(180), 0, 1, 0);
-        if (this.frontTexture) {
-            this.frontTexture.bind();
+        if (this.backTexture) {
+            this.backTexture.bind();
             this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
             this.quad.display();
         }

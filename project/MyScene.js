@@ -50,9 +50,9 @@ export class MyScene extends CGFscene {
 
         this.coordTextures = [
             new CGFtexture(this, './images/test_cubemap/py.png'),
-            new CGFtexture(this, './images/test_cubemap/pz.png'),
-            new CGFtexture(this, './images/test_cubemap/px.png'),
             new CGFtexture(this, './images/test_cubemap/nz.png'),
+            new CGFtexture(this, './images/test_cubemap/px.png'),
+            new CGFtexture(this, './images/test_cubemap/pz.png'),
             new CGFtexture(this, './images/test_cubemap/nx.png'),
             new CGFtexture(this, './images/test_cubemap/ny.png')
         ];
