@@ -39,6 +39,15 @@ export class MyScene extends CGFscene {
             new CGFtexture(this, './images/demo_cubemap/bottom.png')
         ];
 
+        this.mountainTextures = [
+            new CGFtexture(this, './images/mountain_cubemap/top.png'),
+            new CGFtexture(this, './images/mountain_cubemap/front.png'),
+            new CGFtexture(this, './images/mountain_cubemap/right.png'),
+            new CGFtexture(this, './images/mountain_cubemap/back.png'),
+            new CGFtexture(this, './images/mountain_cubemap/left.png'),
+            new CGFtexture(this, './images/mountain_cubemap/bottom.png')
+        ];
+
         this.coordTextures = [
             new CGFtexture(this, './images/test_cubemap/py.png'),
             new CGFtexture(this, './images/test_cubemap/pz.png'),
@@ -48,9 +57,9 @@ export class MyScene extends CGFscene {
             new CGFtexture(this, './images/test_cubemap/ny.png')
         ];
 
-        this.cubeMaptextures = [this.coordTextures, this.skyTextures];
+        this.cubeMaptextures = [this.coordTextures, this.skyTextures, this.mountainTextures];
         this.selectedTexture = 1;
-        this.textureIds = { 'Coords': 0, 'Sky': 1};
+        this.textureIds = { 'Coords': 0, 'Sky': 1, 'Mountain': 2};
 
         // Initialize scene objects
         this.axis = new CGFaxis(this);
