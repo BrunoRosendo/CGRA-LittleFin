@@ -19,8 +19,8 @@ export class MyCylinder extends CGFobject {
     this.normals = [];
     this.texCoords = [];
 
-    const deltaTheta = 2*Math.PI / this.slices;
-    for (let theta = 0, i = 0; i <= 2*this.slices; theta += deltaTheta, i += 2) {
+    const deltaTheta = 2 * Math.PI / this.slices;
+    for (let theta = 0, i = 0; i <= 2 * this.slices; theta += deltaTheta, i += 2) {
         // Vertices coordinates
         const x = Math.sin(theta);
         const z = Math.cos(theta);
@@ -29,23 +29,19 @@ export class MyCylinder extends CGFobject {
         this.vertices.push(x, 1, z);
 
         // Indices
-        this.indices.push(i + 2, i + 1, i);
-        this.indices.push(i + 1, i + 2, i + 3);
+        if (i < 2 * this.slices) {  // last slice does not need indices
+          this.indices.push(i + 2, i + 1, i);
+          this.indices.push(i + 1, i + 2, i + 3);
+        }
 
         // Normals
-        this.normals = this.normals.concat(new Array(2).fill([x, 0, z]).flat());
+        this.normals.push(x, 0, z);
+        this.normals.push(x, 0, z);
 
         // Tex Coords
-        this.texCoords.push(i / (2*this.slices), 1);
-        this.texCoords.push((i - 1) / (2*this.slices), 0);
+        this.texCoords.push(i / (2 * this.slices), 1);
+        this.texCoords.push(i / (2 * this.slices), 0);
     }
-
-    this.indices.pop();
-    this.indices.pop();
-    this.indices.pop();
-    this.indices.pop();
-    this.indices.pop();
-    this.indices.pop();
 
     this.primitiveType = this.scene.gl.TRIANGLES;
     this.initGLBuffers();
