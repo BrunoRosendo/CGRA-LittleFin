@@ -16,8 +16,8 @@ export class MyMovingObject {
     }
 
     update() {
-        this.position[0] += Math.sin(this.orientation) * this.velocity;
-        this.position[2] += Math.cos(this.orientation) * this.velocity;
+        this.position[0] += this.scene.speedFactor * Math.sin(this.orientation) * this.velocity;
+        this.position[2] += this.scene.speedFactor * Math.cos(this.orientation) * this.velocity;
     }
 
     turn(val) {

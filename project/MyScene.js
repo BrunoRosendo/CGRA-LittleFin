@@ -62,6 +62,9 @@ export class MyScene extends CGFscene {
         this.selectedTexture = 1;
         this.textureIds = { 'Coords': 0, 'Sky': 1, 'Mountain': 2};
 
+        this.scaleFactor = 1.0;
+        this.speedFactor = 1.0;
+
         // Initialize scene objects
         this.axis = new CGFaxis(this);
         this.pyramid = new MyMovingObject(this, new MyPyramid(this, 10, 3));
@@ -101,10 +104,9 @@ export class MyScene extends CGFscene {
 
         // Objects connected to MyInterface
         this.displayAxis = true;
-        this.displaySphere = false;
         this.displayPyramid = false;
-        this.displayMyCubeMap = false;
-        this.displaySphere = true;
+        this.displayMyCubeMap = true;
+        this.displaySphere = false;
         this.displayCylinder = true;
     }
     initLights() {
@@ -127,6 +129,7 @@ export class MyScene extends CGFscene {
 
     // called periodically (as per setUpdatePeriod() in init())
     update(t) {
+        t = t * this.speedFactor;
         this.checkKeys();
     }
 
@@ -149,10 +152,22 @@ export class MyScene extends CGFscene {
 
 
         this.defaultAppearance.apply();
+
         // Draw axis
         if (this.displayAxis)
             this.axis.display();
 
+        if (this.displayMyCubeMap) {
+            this.translate(this.camera.position[0],this.camera.position[1],this.camera.position[2]);
+            this.scale(50,50,50);
+            this.mycubemap.display();
+        }
+
+        this.loadIdentity();
+        this.applyViewMatrix();
+
+        this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
+        this.pushMatrix();
 
         // ---- BEGIN Primitive drawing section
         if (this.displayPyramid) {
@@ -160,17 +175,10 @@ export class MyScene extends CGFscene {
             this.pyramid.display();
         }
 
-
         // This sphere does not have defined texture coordinates
         if (this.displaySphere) {
             this.sphereAppearance.apply();
             this.sphere.display();
-        }
-
-        if (this.displayMyCubeMap) {
-            this.translate(this.camera.position[0],this.camera.position[1],this.camera.position[2]);
-            this.scale(50,50,50);
-            this.mycubemap.display();
         }
 
         if (this.displayCylinder) {
