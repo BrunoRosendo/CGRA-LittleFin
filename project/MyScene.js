@@ -104,7 +104,7 @@ export class MyScene extends CGFscene {
 
         // Objects connected to MyInterface
         this.displayAxis = true;
-        this.displayPyramid = false;
+        this.displayPyramid = true;
         this.displayMyCubeMap = true;
         this.displaySphere = true;
         this.displayCylinder = false;
