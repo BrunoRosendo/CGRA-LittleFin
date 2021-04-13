@@ -104,10 +104,10 @@ export class MyScene extends CGFscene {
 
         // Objects connected to MyInterface
         this.displayAxis = true;
-        this.displayPyramid = true;
+        this.displayPyramid = false;
         this.displayMyCubeMap = true;
         this.displaySphere = false;
-        this.displayCylinder = false;
+        this.displayCylinder = true;
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
