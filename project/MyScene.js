@@ -106,8 +106,8 @@ export class MyScene extends CGFscene {
         this.displayAxis = true;
         this.displayPyramid = false;
         this.displayMyCubeMap = true;
-        this.displaySphere = false;
-        this.displayCylinder = true;
+        this.displaySphere = true;
+        this.displayCylinder = false;
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
