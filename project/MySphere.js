@@ -45,6 +45,7 @@ export class MySphere extends CGFobject {
         var y = cosPhi;
         var z = Math.sin(-theta) * sinPhi;
         this.vertices.push(x, y, z);
+        this.texCoords.push(longitude/this.longDivs, latitude/this.latDivs);
 
         //--- Indices
         if (latitude < this.latDivs && longitude < this.longDivs) {
@@ -78,4 +79,5 @@ export class MySphere extends CGFobject {
     this.primitiveType = this.scene.gl.TRIANGLES;
     this.initGLBuffers();
   }
+
 }

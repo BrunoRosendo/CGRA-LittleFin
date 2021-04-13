@@ -3,6 +3,7 @@ import { MyMovingObject } from "./MyMovingObject.js"
 import { MyPyramid } from "./MyPyramid.js";
 import { MySphere } from "./MySphere.js";
 import { MyCubeMap } from "./MyCubeMap.js";
+import { MyCylinder } from "./MyCylinder.js";
 
 /**
 * MyScene
@@ -63,9 +64,10 @@ export class MyScene extends CGFscene {
 
         // Initialize scene objects
         this.axis = new CGFaxis(this);
-        this.incompleteSphere = new MySphere(this, 16, 8);
         this.pyramid = new MyMovingObject(this, new MyPyramid(this, 10, 3));
         this.mycubemap = new MyCubeMap(this, this.cubeMaptextures[this.selectedTexture]);
+        this.sphere = new MySphere(this, 16, 8);
+        this.cylinder = new MyCylinder(this, 12);
 
 
         this.defaultAppearance = new CGFappearance(this);
@@ -87,13 +89,23 @@ export class MyScene extends CGFscene {
         this.sphereAppearance.setDiffuse(0.7, 0.7, 0.7, 1);
         this.sphereAppearance.setSpecular(0.0, 0.0, 0.0, 1);
         this.sphereAppearance.setShininess(120);
+        this.sphereAppearance.loadTexture('./images/earth.jpg');
+
+        this.cylinderAppearance = new CGFappearance(this);
+        this.cylinderAppearance.setAmbient(0.3, 0.3, 0.3, 1);
+        this.cylinderAppearance.setDiffuse(0.7, 0.7, 0.7, 1);
+        this.cylinderAppearance.setSpecular(0.0, 0.0, 0.0, 1);
+        this.cylinderAppearance.setShininess(120);
+        this.cylinderAppearance.loadTexture('./images/earth.jpg');
 
 
         // Objects connected to MyInterface
         this.displayAxis = true;
         this.displaySphere = false;
         this.displayPyramid = false;
-        this.displayMyCubeMap = true;
+        this.displayMyCubeMap = false;
+        this.displaySphere = true;
+        this.displayCylinder = true;
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -152,13 +164,18 @@ export class MyScene extends CGFscene {
         // This sphere does not have defined texture coordinates
         if (this.displaySphere) {
             this.sphereAppearance.apply();
-            this.incompleteSphere.display();
+            this.sphere.display();
         }
 
         if (this.displayMyCubeMap) {
             this.translate(this.camera.position[0],this.camera.position[1],this.camera.position[2]);
             this.scale(50,50,50);
             this.mycubemap.display();
+        }
+
+        if (this.displayCylinder) {
+            this.cylinderAppearance.apply();
+            this.cylinder.display();
         }
 
         // ---- END Primitive drawing section
