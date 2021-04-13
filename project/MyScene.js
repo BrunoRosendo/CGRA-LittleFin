@@ -104,10 +104,10 @@ export class MyScene extends CGFscene {
 
         // Objects connected to MyInterface
         this.displayAxis = true;
-        this.displayPyramid = false;
+        this.displayPyramid = true;
         this.displayMyCubeMap = true;
         this.displaySphere = false;
-        this.displayCylinder = true;
+        this.displayCylinder = false;
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -137,58 +137,6 @@ export class MyScene extends CGFscene {
         this.mycubemap.updateAppliedTexture(this.cubeMaptextures[this.selectedTexture]);
     }
 
-    display() {
-        // ---- BEGIN Background, camera and axis setup
-        // Clear image and depth buffer everytime we update the scene
-        this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
-        this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
-        // Initialize Model-View matrix as identity (no transformation
-        this.updateProjectionMatrix();
-        this.loadIdentity();
-        // Apply transformations corresponding to the camera position relative to the origin
-        this.applyViewMatrix();
-
-        this.pushMatrix();
-
-
-        this.defaultAppearance.apply();
-
-        // Draw axis
-        if (this.displayAxis)
-            this.axis.display();
-
-        if (this.displayMyCubeMap) {
-            this.translate(this.camera.position[0],this.camera.position[1],this.camera.position[2]);
-            this.scale(50,50,50);
-            this.mycubemap.display();
-        }
-
-        this.loadIdentity();
-        this.applyViewMatrix();
-
-        this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
-        this.pushMatrix();
-
-        // ---- BEGIN Primitive drawing section
-        if (this.displayPyramid) {
-            this.pyramidAppearance.apply();
-            this.pyramid.display();
-        }
-
-        // This sphere does not have defined texture coordinates
-        if (this.displaySphere) {
-            this.sphereAppearance.apply();
-            this.sphere.display();
-        }
-
-        if (this.displayCylinder) {
-            this.cylinderAppearance.apply();
-            this.cylinder.display();
-        }
-
-        // ---- END Primitive drawing section
-    }
-
     checkKeys() {
         // Check for key codes e.g. in https://keycode.info/
         if (this.gui.isKeyPressed("KeyW")) {
@@ -216,5 +164,57 @@ export class MyScene extends CGFscene {
                 this.pyramid.reset();
         }
 
+    }
+
+    display() {
+        // ---- BEGIN Background, camera and axis setup
+        // Clear image and depth buffer everytime we update the scene
+        this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
+        this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
+        // Initialize Model-View matrix as identity (no transformation
+        this.updateProjectionMatrix();
+        this.loadIdentity();
+        // Apply transformations corresponding to the camera position relative to the origin
+        this.applyViewMatrix();
+
+        this.pushMatrix();
+
+
+        this.defaultAppearance.apply();
+
+        // Draw axis
+        if (this.displayAxis)
+            this.axis.display();
+
+        if (this.displayMyCubeMap) {
+            this.translate(this.camera.position[0],this.camera.position[1],this.camera.position[2]);
+            this.scale(500,500,500);
+            this.mycubemap.display();
+        }
+
+        this.loadIdentity();
+        this.applyViewMatrix();
+
+        this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
+        this.pushMatrix();
+
+        // ---- BEGIN Primitive drawing section
+        if (this.displayPyramid) {
+            this.pyramidAppearance.apply();
+            this.pyramid.display();
+        }
+
+        // This sphere does not have defined texture coordinates
+        if (this.displaySphere) {
+            this.sphereAppearance.apply();
+            this.sphere.display();
+        }
+
+        if (this.displayCylinder) {
+            this.cylinderAppearance.apply();
+            this.cylinder.display();
+        }
+
+        // ---- END Primitive drawing section
     }
 }
