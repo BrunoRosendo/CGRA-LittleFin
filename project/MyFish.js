@@ -70,7 +70,8 @@ export class MyFish extends CGFobject {
         this.scene.pushMatrix();
 
         // Sphere
-        this.scene.scale(0.8,0.8,1.15);
+        this.scene.scale(0.8,0.8,1.2);
+        this.scene.rotate(-Math.PI/2, 0, 1, 0);
         this.bodyMaterial.apply();
         this.scene.setActiveShader(this.bodyShader);
         this.sphere.display();
@@ -80,7 +81,7 @@ export class MyFish extends CGFobject {
         this.scene.pushMatrix();
 
         // Tail
-        this.scene.translate(0,0,-1.93);
+        this.scene.translate(0,0,-2);
         this.scene.rotate(-Math.PI/4, 1, 0, 0);
         this.scene.rotate(Math.PI/2, 0, 1, 0);
         this.scene.scale(0.6,0.6,.6);
@@ -91,7 +92,7 @@ export class MyFish extends CGFobject {
         this.scene.pushMatrix();
 
         // Left Fin
-        this.scene.translate(0.9, -0.4, -0.2);
+        this.scene.translate(0.9, -0.4, -0.1);
         this.scene.rotate(Math.PI/6, 0, 0 , 1);
         this.scene.rotate(3*Math.PI/4, 1, 0, 0)
         this.scene.rotate(-Math.PI/2, 0, 1, 0);
@@ -102,7 +103,7 @@ export class MyFish extends CGFobject {
         this.scene.pushMatrix();
         
         // Right Fin
-        this.scene.translate(-0.9, -0.4, -0.2);
+        this.scene.translate(-0.9, -0.4, -0.1);
         this.scene.rotate(-Math.PI/6, 0, 0 , 1);
         this.scene.rotate(3*Math.PI/4, 1, 0, 0)
         this.scene.rotate(-Math.PI/2, 0, 1, 0);
@@ -122,7 +123,7 @@ export class MyFish extends CGFobject {
         this.scene.pushMatrix();
 
         // Left Eye
-        this.scene.translate(0.7, 0.1,.3);
+        this.scene.translate(0.7, 0.1,.7);
         this.scene.scale(0.15,0.15,0.15);
         this.eyeMaterial.apply();
         this.leftEye.display();
@@ -131,7 +132,7 @@ export class MyFish extends CGFobject {
         this.scene.pushMatrix();
 
         // Right Eye
-        this.scene.translate(-0.7,0.1,.3);
+        this.scene.translate(-0.7,0.1,.7);
         this.scene.scale(0.15,0.15,0.15);
         this.rightEye.display();
         
