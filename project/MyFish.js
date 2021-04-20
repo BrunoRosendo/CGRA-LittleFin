@@ -19,17 +19,37 @@ export class MyFish extends CGFobject {
         this.leftEye = new MySphere(this.scene, 5, 5);
         this.rightEye = new MySphere(this.scene, 5, 5);
 
-        this.defaultAppearance = new CGFappearance(this.scene);
-        this.defaultAppearance.setAmbient(0.2, 0.4, 0.8, 1.0);
-        this.defaultAppearance.setDiffuse(0.2, 0.4, 0.8, 1.0);
-        this.defaultAppearance.setSpecular(0.2, 0.4, 0.8, 1.0);
-        this.defaultAppearance.setEmission(0, 0, 0, 1);
-        this.defaultAppearance.setShininess(120);
+        this.redMaterial = new CGFappearance(this.scene);
+        this.redMaterial.setAmbient(0.8, 0.1, 0.1, 1.0);
+        this.redMaterial.setDiffuse(0.8, 0.1, 0.1, 1.0);
+        this.redMaterial.setSpecular(1.0, 0.1, 0.1, 1.0);
+        this.redMaterial.setShininess(20.0);
     }
+
+    enableNormalViz() {
+        this.sphere.enableNormalViz();
+        this.tail.enableNormalViz();
+        this.mohawk.enableNormalViz();
+        this.finLeft.enableNormalViz();
+        this.finRight.enableNormalViz();
+        this.leftEye.enableNormalViz();
+        this.rightEye.enableNormalViz();
+      }
+    
+      disableNormalViz() {
+        this.sphere.disableNormalViz();
+        this.tail.disableNormalViz();
+        this.mohawk.disableNormalViz();
+        this.finLeft.disableNormalViz();
+        this.finRight.disableNormalViz();
+        this.leftEye.disableNormalViz();
+        this.rightEye.disableNormalViz();
+      }
 
     display(){
         // Sphere
         this.scene.scale(0.8,0.8,1.15);
+        this.redMaterial.apply();
         this.sphere.display();
 
         this.scene.popMatrix();
@@ -44,8 +64,6 @@ export class MyFish extends CGFobject {
 
         this.scene.popMatrix();
         this.scene.pushMatrix();
-
-        this.defaultAppearance.apply();
 
         // Left Fin
         this.scene.translate(0.9, -0.4, -0.2);
