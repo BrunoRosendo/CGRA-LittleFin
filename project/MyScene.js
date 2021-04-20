@@ -7,18 +7,6 @@ import { MyCylinder } from "./MyCylinder.js";
 import { MyFish } from "./MyFish.js";
 
 /**
- * getStringFromUrl(url)
- * Function to load a text file from a URL (used to display shader sources)
- */
-
-function getStringFromUrl(url) {
-	var xmlHttpReq = new XMLHttpRequest();
-    xmlHttpReq.open("GET", url, false);
-    xmlHttpReq.send();
-    return xmlHttpReq.responseText;
-}
-
-/**
 * MyScene
 * @constructor
 */
@@ -30,7 +18,6 @@ export class MyScene extends CGFscene {
         super.init(application);
         this.initCameras();
         this.initLights();
-        this.initShaders();
 
         // Background color
         this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
@@ -136,17 +123,6 @@ export class MyScene extends CGFscene {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
     }
 
-    initShaders() {
-        this.fishShader = new CGFshader(this.gl, "shaders/fish.vert", "shaders/fish.frag");
-        this.fishShader.setUniformsValues({ timeFactor: 0 });
-
-        // // Add shaders to the html page        
-        // this.vShaderDiv = document.getElementById("vshader");
-        // this.fShaderDiv = document.getElementById("fshader");
-        // this.vShaderDiv.innerHTML = "<xmp>" + getStringFromUrl(this.fishShader.vertexURL) + "</xmp>";
-        // this.fShaderDiv.innerHTML = "<xmp>" + getStringFromUrl(this.fishShader.fragURL) + "</xmp>";
-    }
-
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
         this.setDiffuse(0.2, 0.4, 0.8, 1.0);
@@ -247,6 +223,7 @@ export class MyScene extends CGFscene {
             this.fish.display();
         }
 
+        this.setActiveShader(this.defaultShader);
 
         // ---- END Primitive drawing section
     }

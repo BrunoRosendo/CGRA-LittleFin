@@ -1,4 +1,4 @@
-import { CGFobject, CGFappearance, CGFtexture } from '../lib/CGF.js';
+import { CGFobject, CGFappearance, CGFshader } from '../lib/CGF.js';
 import { MySphere } from './MySphere.js';
 import { MyTriangle } from './MyTriangle.js';
 import { MyTriangleSmall } from './MyTriangleSmall.js';
@@ -18,6 +18,8 @@ export class MyFish extends CGFobject {
         this.finRight = new MyTriangleSmall(this.scene);
         this.leftEye = new MySphere(this.scene, 5, 5);
         this.rightEye = new MySphere(this.scene, 5, 5);
+
+        this.bodyShader = new CGFshader(this.scene.gl, "shaders/fishBody.vert", "shaders/fishBody.frag");
 
         this.initMaterials();
     }
@@ -70,7 +72,9 @@ export class MyFish extends CGFobject {
         // Sphere
         this.scene.scale(0.8,0.8,1.15);
         this.bodyMaterial.apply();
+        this.scene.setActiveShader(this.bodyShader);
         this.sphere.display();
+        this.scene.setActiveShader(this.scene.defaultShader);
 
         this.scene.popMatrix();
         this.scene.pushMatrix();
