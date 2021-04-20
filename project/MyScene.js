@@ -242,9 +242,8 @@ export class MyScene extends CGFscene {
         }
 
         if (this.displayFish) {
-            // this.setActiveShader(this.fishShader);
+            this.translate(0, 3, 0);
             this.fish.display();
-            // this.setActiveShader(this.defaultShader);
         }
 
 

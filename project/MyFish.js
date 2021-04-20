@@ -57,7 +57,9 @@ export class MyFish extends CGFobject {
         this.rightEye.disableNormalViz();
       }
 
-    display(){
+    display() {
+        this.scene.pushMatrix();
+
         // Sphere
         this.scene.scale(0.8,0.8,1.15);
         this.redMaterial.apply();
