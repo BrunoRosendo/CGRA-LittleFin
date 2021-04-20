@@ -1,4 +1,4 @@
-import { CGFobject, CGFappearance } from '../lib/CGF.js';
+import { CGFobject, CGFappearance, CGFtexture } from '../lib/CGF.js';
 import { MySphere } from './MySphere.js';
 import { MyTriangle } from './MyTriangle.js';
 import { MyTriangleSmall } from './MyTriangleSmall.js';
@@ -19,11 +19,22 @@ export class MyFish extends CGFobject {
         this.leftEye = new MySphere(this.scene, 5, 5);
         this.rightEye = new MySphere(this.scene, 5, 5);
 
+        this.initMaterials();
+    }
+
+    initMaterials() {
         this.redMaterial = new CGFappearance(this.scene);
         this.redMaterial.setAmbient(0.8, 0.1, 0.1, 1.0);
         this.redMaterial.setDiffuse(0.8, 0.1, 0.1, 1.0);
         this.redMaterial.setSpecular(1.0, 0.1, 0.1, 1.0);
         this.redMaterial.setShininess(20.0);
+
+        this.eyeMaterial = new CGFappearance(this.scene);
+        this.eyeMaterial.setAmbient(1.0, 1.0, 1.0, 1);
+        this.eyeMaterial.setDiffuse(1.0, 1.0, 1.0, 1);
+        this.eyeMaterial.setSpecular(1.0, 1.0, 1.0, 1);
+        this.eyeMaterial.setShininess(120);
+        this.eyeMaterial.loadTexture('./images/underwater/pier.jpg');  // change image
     }
 
     enableNormalViz() {
@@ -99,6 +110,7 @@ export class MyFish extends CGFobject {
         // Left Eye
         this.scene.translate(0.7, 0.1,.3);
         this.scene.scale(0.15,0.15,0.15);
+        this.eyeMaterial.apply();
         this.leftEye.display();
         
         this.scene.popMatrix();
