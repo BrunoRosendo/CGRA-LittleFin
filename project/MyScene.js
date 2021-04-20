@@ -1,9 +1,22 @@
-import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFtexture } from "../lib/CGF.js";
+import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFtexture, CGFshader } from "../lib/CGF.js";
 import { MyMovingObject } from "./MyMovingObject.js"
 import { MyPyramid } from "./MyPyramid.js";
 import { MySphere } from "./MySphere.js";
 import { MyCubeMap } from "./MyCubeMap.js";
 import { MyCylinder } from "./MyCylinder.js";
+import { MyFish } from "./MyFish.js";
+
+/**
+ * getStringFromUrl(url)
+ * Function to load a text file from a URL (used to display shader sources)
+ */
+
+function getStringFromUrl(url) {
+	var xmlHttpReq = new XMLHttpRequest();
+    xmlHttpReq.open("GET", url, false);
+    xmlHttpReq.send();
+    return xmlHttpReq.responseText;
+}
 
 /**
 * MyScene
@@ -17,6 +30,7 @@ export class MyScene extends CGFscene {
         super.init(application);
         this.initCameras();
         this.initLights();
+        this.initShaders();
 
         // Background color
         this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
@@ -60,7 +74,7 @@ export class MyScene extends CGFscene {
 
         this.cubeMaptextures = [this.coordTextures, this.skyTextures, this.mountainTextures];
         this.selectedTexture = 1;
-        this.textureIds = { 'Coords': 0, 'Sky': 1, 'Mountain': 2};
+        this.textureIds = { 'Coords': 0, 'Sky': 1, 'Mountain': 2 };
 
         this.scaleFactor = 1.0;
         this.speedFactor = 1.0;
@@ -71,6 +85,7 @@ export class MyScene extends CGFscene {
         this.mycubemap = new MyCubeMap(this, this.cubeMaptextures[this.selectedTexture]);
         this.sphere = new MySphere(this, 16, 8);
         this.cylinder = new MyCylinder(this, 12);
+        this.fish = new MyFish(this);
 
 
         this.defaultAppearance = new CGFappearance(this);
@@ -104,10 +119,11 @@ export class MyScene extends CGFscene {
 
         // Objects connected to MyInterface
         this.displayAxis = true;
-        this.displayPyramid = true;
+        this.displayPyramid = false;
         this.displayMyCubeMap = true;
-        this.displaySphere = true;
+        this.displaySphere = false;
         this.displayCylinder = false;
+        this.displayFish = true;
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -117,6 +133,16 @@ export class MyScene extends CGFscene {
     }
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
+    }
+
+    initShaders() {
+        this.fishShader = new CGFshader(this.gl, "shaders/fish.vert", "shaders/fish.frag");
+
+        // Add shaders to the html page        
+        this.vShaderDiv = document.getElementById("vshader");
+        this.fShaderDiv = document.getElementById("fshader");
+        this.vShaderDiv.innerHTML = "<xmp>" + getStringFromUrl(this.fishShader.vertexURL) + "</xmp>";
+        this.fShaderDiv.innerHTML = "<xmp>" + getStringFromUrl(this.fishShader.fragURL) + "</xmp>";
     }
 
     setDefaultAppearance() {
@@ -176,7 +202,6 @@ export class MyScene extends CGFscene {
         this.loadIdentity();
         // Apply transformations corresponding to the camera position relative to the origin
         this.applyViewMatrix();
-
         this.pushMatrix();
 
 
@@ -187,8 +212,8 @@ export class MyScene extends CGFscene {
             this.axis.display();
 
         if (this.displayMyCubeMap) {
-            this.translate(this.camera.position[0],this.camera.position[1],this.camera.position[2]);
-            this.scale(500,500,500);
+            this.translate(this.camera.position[0], this.camera.position[1], this.camera.position[2]);
+            this.scale(500, 500, 500);
             this.mycubemap.display();
         }
 
@@ -214,6 +239,13 @@ export class MyScene extends CGFscene {
             this.cylinderAppearance.apply();
             this.cylinder.display();
         }
+
+        if (this.displayFish) {
+            // this.setActiveShader(this.fishShader);
+            this.fish.display();
+            // this.setActiveShader(this.defaultShader);
+        }
+
 
         // ---- END Primitive drawing section
     }
