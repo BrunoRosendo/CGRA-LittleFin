@@ -16,11 +16,8 @@ export class MyTriangleSmall extends CGFobject {
 			-1, 0, 0, // 0
 			1, 0, 0,  // 1
 			0, 1, 0,   // 2
-
-			- 1, 0, 0, // 3
-			1, 0, 0,  // 4
-			0, 1, 0   // 5
 		];
+		this.vertices = this.vertices.concat(this.vertices);
 
 		//Counter-clockwise reference of vertices
 		this.indices = [
@@ -28,13 +25,8 @@ export class MyTriangleSmall extends CGFobject {
 			5, 4, 3
 		];
 
-		this.normals = new Array(3).fill([0, 0, 1]).flat().concat(new Array(3).fill([0, 0, -1]).flat());
-
-		this.texCoords = [
-			0.02, 0.02,
-			0.02, 0.48,
-			0.25, 0.25
-		];
+		this.normals = new Array(3).fill([0, 0, 1]).flat();
+		this.normals = this.normals.concat(new Array(3).fill([0, 0, -1]).flat());
 
 		//The defined indices (and corresponding vertices)
 		//will be read in groups of three to draw triangles
