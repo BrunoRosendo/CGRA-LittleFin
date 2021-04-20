@@ -35,6 +35,13 @@ export class MyFish extends CGFobject {
         this.eyeMaterial.setSpecular(1.0, 1.0, 1.0, 1);
         this.eyeMaterial.setShininess(120);
         this.eyeMaterial.loadTexture('./images/underwater/pier.jpg');  // change image
+
+        this.bodyMaterial = new CGFappearance(this.scene);
+        this.bodyMaterial.setAmbient(1.0, 1.0, 1.0, 1);
+        this.bodyMaterial.setDiffuse(1.0, 1.0, 1.0, 1);
+        this.bodyMaterial.setSpecular(1.0, 1.0, 1.0, 1);
+        this.bodyMaterial.setShininess(120);
+        this.bodyMaterial.loadTexture('./images/underwater/distortionmap.png');
     }
 
     enableNormalViz() {
@@ -62,7 +69,7 @@ export class MyFish extends CGFobject {
 
         // Sphere
         this.scene.scale(0.8,0.8,1.15);
-        this.redMaterial.apply();
+        this.bodyMaterial.apply();
         this.sphere.display();
 
         this.scene.popMatrix();
@@ -73,6 +80,7 @@ export class MyFish extends CGFobject {
         this.scene.rotate(-Math.PI/4, 1, 0, 0);
         this.scene.rotate(Math.PI/2, 0, 1, 0);
         this.scene.scale(0.6,0.6,.6);
+        this.redMaterial.apply();
         this.tail.display();
 
         this.scene.popMatrix();

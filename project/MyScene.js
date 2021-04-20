@@ -138,6 +138,7 @@ export class MyScene extends CGFscene {
 
     initShaders() {
         this.fishShader = new CGFshader(this.gl, "shaders/fish.vert", "shaders/fish.frag");
+        this.fishShader.setUniformsValues({ timeFactor: 0 });
 
         // // Add shaders to the html page        
         // this.vShaderDiv = document.getElementById("vshader");
