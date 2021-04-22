@@ -5,9 +5,10 @@ uniform mat4 uMVMatrix;
 uniform mat4 uPMatrix;
 
 varying vec2 vTextureCoord;
+varying vec3 vertexPosition;
 
 void main() {
 	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
-
+	vertexPosition = aVertexPosition;
 	vTextureCoord = aTextureCoord;
 }
