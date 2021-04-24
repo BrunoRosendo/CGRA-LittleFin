@@ -39,14 +39,14 @@ export class MyFish extends CGFobject {
         this.eyeMaterial.setDiffuse(1.0, 1.0, 1.0, 1);
         this.eyeMaterial.setSpecular(1.0, 1.0, 1.0, 1);
         this.eyeMaterial.setShininess(120);
-        this.eyeMaterial.loadTexture('./images/underwater/pier.jpg');  // change image
+        this.eyeMaterial.loadTexture('./images/fish/eye.png');  // change image
 
         this.bodyMaterial = new CGFappearance(this.scene);
         this.bodyMaterial.setAmbient(1.0, 1.0, 1.0, 1);
         this.bodyMaterial.setDiffuse(1.0, 1.0, 1.0, 1);
         this.bodyMaterial.setSpecular(1.0, 1.0, 1.0, 1);
         this.bodyMaterial.setShininess(120);
-        this.bodyMaterial.loadTexture('./images/underwater/distortionmap.png');
+        this.bodyMaterial.loadTexture('./images/fish/body.jpg');
     }
 
     update(t) {
@@ -149,6 +149,7 @@ export class MyFish extends CGFobject {
 
         // Left Eye
         this.scene.translate(0.7, 0.1,.7);
+        this.scene.rotate(toRads(120), 0, 1, 0);
         this.scene.scale(0.15,0.15,0.15);
         this.eyeMaterial.apply();
         this.leftEye.display();
