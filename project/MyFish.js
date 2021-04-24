@@ -105,8 +105,15 @@ export class MyFish extends CGFobject {
         this.scene.pushMatrix();
 
         // Left Fin
+        const finAngle = toRads(20) * Math.sin(this.t * 0.7);
+
         this.scene.translate(0.9, -0.4, -0.1);
-        this.scene.rotate(Math.PI/6, 0, 0 , 1);
+        this.scene.rotate(Math.PI/6, 0, 0, 1);
+
+        this.scene.translate(0, 0.3, 0);
+        this.scene.rotate(finAngle, 0, 0, 1);
+        this.scene.translate(0, -0.3, 0);
+
         this.scene.rotate(3*Math.PI/4, 1, 0, 0)
         this.scene.rotate(-Math.PI/2, 0, 1, 0);
         this.scene.scale(0.5,0.5,.5);
@@ -118,6 +125,11 @@ export class MyFish extends CGFobject {
         // Right Fin
         this.scene.translate(-0.9, -0.4, -0.1);
         this.scene.rotate(-Math.PI/6, 0, 0 , 1);
+
+        this.scene.translate(0, 0.3, 0);
+        this.scene.rotate(-finAngle, 0, 0, 1);
+        this.scene.translate(0, -0.3, 0);
+
         this.scene.rotate(3*Math.PI/4, 1, 0, 0)
         this.scene.rotate(-Math.PI/2, 0, 1, 0);
         this.scene.scale(0.5,0.5,.5);
