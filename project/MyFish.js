@@ -31,7 +31,7 @@ export class MyFish extends CGFobject {
         this.redMaterial = new CGFappearance(this.scene);
         this.redMaterial.setAmbient(0.8, 0.1, 0.1, 1.0);
         this.redMaterial.setDiffuse(0.8, 0.1, 0.1, 1.0);
-        this.redMaterial.setSpecular(1.0, 0.1, 0.1, 1.0);
+        this.redMaterial.setSpecular(0.9, 0.1, 0.1, 1.0);
         this.redMaterial.setShininess(20.0);
 
         this.eyeMaterial = new CGFappearance(this.scene);
