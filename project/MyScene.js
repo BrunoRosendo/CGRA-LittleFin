@@ -135,6 +135,7 @@ export class MyScene extends CGFscene {
     update(t) {
         t = t * this.speedFactor;
         this.checkKeys();
+        this.fish.update(t);
     }
 
     updateMyCubeMapTexture() {

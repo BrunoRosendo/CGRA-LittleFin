@@ -2,6 +2,7 @@ import { CGFobject, CGFappearance, CGFshader } from '../lib/CGF.js';
 import { MySphere } from './MySphere.js';
 import { MyTriangle } from './MyTriangle.js';
 import { MyTriangleSmall } from './MyTriangleSmall.js';
+import { toRads } from './utilities/algebra.js';
 
 export class MyFish extends CGFobject {
     
@@ -11,6 +12,8 @@ export class MyFish extends CGFobject {
     }
 
     init() {
+        this.t = 0;
+
         this.sphere = new MySphere(this.scene, 10, 10);
         this.tail = new MyTriangle(this.scene);
         this.mohawk = new MyTriangle(this.scene);
@@ -44,6 +47,10 @@ export class MyFish extends CGFobject {
         this.bodyMaterial.setSpecular(1.0, 1.0, 1.0, 1);
         this.bodyMaterial.setShininess(120);
         this.bodyMaterial.loadTexture('./images/underwater/distortionmap.png');
+    }
+
+    update(t) {
+        this.t = t / 150;
     }
 
     enableNormalViz() {
@@ -82,6 +89,12 @@ export class MyFish extends CGFobject {
 
         // Tail
         this.scene.translate(0,0,-2);
+
+        const tailAngle = toRads(20) * Math.sin(this.t);
+        this.scene.translate(0, 0, 1);
+        this.scene.rotate(tailAngle, 0, 1, 0);
+        this.scene.translate(0, 0, -1);
+
         this.scene.rotate(-Math.PI/4, 1, 0, 0);
         this.scene.rotate(Math.PI/2, 0, 1, 0);
         this.scene.scale(0.6,0.6,.6);
