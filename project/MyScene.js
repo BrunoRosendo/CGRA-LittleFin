@@ -42,6 +42,7 @@ export class MyScene extends CGFscene {
             new CGFtexture(this, './images/demo_cubemap/bottom.png')
         ];
 
+        // https://www.nicepng.com/ourpic/u2q8o0t4i1w7q8y3_desert-skybox-texture-png/
         this.mountainTextures = [
             new CGFtexture(this, './images/mountain_cubemap/top.png'),
             new CGFtexture(this, './images/mountain_cubemap/front.png'),
