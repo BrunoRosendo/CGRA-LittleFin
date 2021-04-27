@@ -148,7 +148,7 @@ export class MyFish extends CGFobject {
         this.scene.pushMatrix();
 
         // Left Eye
-        this.scene.translate(0.7, 0.1,.7);
+        this.scene.translate(0.6, 0.1,.7);
         this.scene.rotate(toRads(120), 0, 1, 0);
         this.scene.scale(0.15,0.15,0.15);
         this.eyeMaterial.apply();
@@ -158,7 +158,7 @@ export class MyFish extends CGFobject {
         this.scene.pushMatrix();
 
         // Right Eye
-        this.scene.translate(-0.7,0.1,.7);
+        this.scene.translate(-0.6,0.1,.7);
         this.scene.scale(0.15,0.15,0.15);
         this.rightEye.display();
         
