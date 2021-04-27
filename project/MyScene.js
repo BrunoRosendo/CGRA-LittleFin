@@ -5,6 +5,7 @@ import { MySphere } from "./MySphere.js";
 import { MyCubeMap } from "./MyCubeMap.js";
 import { MyCylinder } from "./MyCylinder.js";
 import { MyFish } from "./MyFish.js";
+import { MySeaFloor } from "./MySeaFloor.js";
 
 /**
 * MyScene
@@ -73,6 +74,7 @@ export class MyScene extends CGFscene {
         this.sphere = new MySphere(this, 16, 8);
         this.cylinder = new MyCylinder(this, 12);
         this.fish = new MyFish(this);
+        this.floor = new MySeaFloor(this, 20, 50, 1, 0.1);
 
 
         this.defaultAppearance = new CGFappearance(this);
@@ -220,6 +222,7 @@ export class MyScene extends CGFscene {
         }
 
         if (this.displayFish) {
+            this.floor.display();
             this.translate(0, 3, 0);
             this.fish.display();
         }
