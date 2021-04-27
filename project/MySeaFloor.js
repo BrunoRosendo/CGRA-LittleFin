@@ -13,13 +13,11 @@ export class MySeaFloor extends CGFobject {
 	constructor(scene, numDiv, size, maxHeight, offset) {
 		super(scene);
 		this.size = size;
-        this.maxHeight = maxHeight;
-        this.offset = offset;
 
         this.plane = new MyPlane(this.scene, numDiv);
 
         this.shader = new CGFshader(this.scene.gl, "shaders/seaFloor.vert", "shaders/seaFloor.frag");
-        this.shader.setUniformsValues({ uSampler2: 1 });
+        this.shader.setUniformsValues({ uSampler2: 1, offset, maxHeight });
 
         this.material = new CGFappearance(this.scene);
         this.material.setAmbient(1.0, 1.0, 1.0, 1);
