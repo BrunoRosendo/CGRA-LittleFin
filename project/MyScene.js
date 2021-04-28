@@ -5,6 +5,7 @@ import { MySphere } from "./MySphere.js";
 import { MyCubeMap } from "./MyCubeMap.js";
 import { MyCylinder } from "./MyCylinder.js";
 import { MyFish } from "./MyFish.js";
+import { MyWaterSurface } from "./MyWaterSurface.js";
 
 /**
 * MyScene
@@ -63,7 +64,7 @@ export class MyScene extends CGFscene {
         this.selectedTexture = 1;
         this.textureIds = { 'Coords': 0, 'Sky': 1, 'Mountain': 2 };
 
-        this.scaleFactor = 1.0;
+        this.scaleFactor = 10.0;
         this.speedFactor = 1.0;
 
         // Initialize scene objects
@@ -73,7 +74,7 @@ export class MyScene extends CGFscene {
         this.sphere = new MySphere(this, 16, 8);
         this.cylinder = new MyCylinder(this, 12);
         this.fish = new MyFish(this);
-
+        this.waterSurf = new MyWaterSurface(this);
 
         this.defaultAppearance = new CGFappearance(this);
         this.defaultAppearance.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -107,10 +108,11 @@ export class MyScene extends CGFscene {
         // Objects connected to MyInterface
         this.displayAxis = true;
         this.displayPyramid = false;
-        this.displayMyCubeMap = true;
+        this.displayMyCubeMap = false;
         this.displaySphere = false;
         this.displayCylinder = false;
-        this.displayFish = true;
+        this.displayFish = false;
+        this.displayWaterSurface = true;
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -136,6 +138,7 @@ export class MyScene extends CGFscene {
         t = t * this.speedFactor;
         this.checkKeys();
         this.fish.update(t);
+        this.waterSurf.update(t);
     }
 
     updateMyCubeMapTexture() {
@@ -222,6 +225,10 @@ export class MyScene extends CGFscene {
         if (this.displayFish) {
             this.translate(0, 3, 0);
             this.fish.display();
+        }
+
+        if(this.displayWaterSurface){
+            this.waterSurf.display();
         }
 
         this.setActiveShader(this.defaultShader);
