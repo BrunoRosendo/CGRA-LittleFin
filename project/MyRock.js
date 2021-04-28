@@ -6,11 +6,13 @@ export class MyRock extends CGFobject {
    * @param  {CGFscene} scene - MyScene object
    * @param  {integer} slices - number of slices around Y axis
    * @param  {integer} stacks - number of stacks along Y axis, from the center to the poles (half of sphere)
+   * @param  {double} splitValue - value in which x, y and z are divided in order to distort the sphere
    */
-  constructor(scene, slices, stacks) {
+  constructor(scene, slices, stacks, splitValue) {
     super(scene);
     this.latDivs = stacks * 2;
     this.longDivs = slices;
+    this.splitValue = splitValue || 3;
 
     this.initBuffers();
   }
@@ -52,9 +54,9 @@ export class MyRock extends CGFobject {
             offsetY = firstVertexOffsets.y;
             offsetZ = firstVertexOffsets.z;
         } else {
-            offsetX = Math.random() * (x / 3) - x / 6;
-            offsetY = Math.random() * (y / 3) - y / 6;
-            offsetZ = Math.random() * (z / 3) - z / 6;
+            offsetX = Math.random() * (x / this.splitValue) - x / (this.splitValue*2);
+            offsetY = Math.random() * (y / this.splitValue) - y / (this.splitValue*2);
+            offsetZ = Math.random() * (z / this.splitValue) - z / (this.splitValue*2);
         }
         x += offsetX;
         y += offsetY;

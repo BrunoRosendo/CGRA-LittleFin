@@ -3,9 +3,12 @@ import { MyRock } from './MyRock.js'
 
 export class MyRockSet extends CGFobject {
 
-    constructor(scene, numRocks) {
+    constructor(scene, numRocks, radius, maxScale, minScale) {
         super(scene);
-        this.init(numRocks)
+        this.radius = radius || 1;
+        this.maxScale = maxScale || 0.2;
+        this.minScale = minScale || 0.01;
+        this.init(numRocks);
     }
 
     init(numRocks) {
@@ -14,11 +17,11 @@ export class MyRockSet extends CGFobject {
         for (let i = 0; i < numRocks; ++i) {
             this.rocks.push({
                 orientation: Math.floor(Math.random() * Math.PI),
-                posX: Math.random() * 2 - 1,
+                posX: Math.random() * 2 * this.radius - this.radius / 2,
                 posZ: Math.random() * 2 - 1,  // Y is always 0
-                scaleX: Math.random() * 0.19 + 0.01,
-                scaleY: Math.random() * 0.19 + 0.01,
-                scaleZ: Math.random() * 0.19 + 0.01,
+                scaleX: Math.random() * (this.maxScale - this.minScale) + this.minScale,
+                scaleY: Math.random() * (this.maxScale - this.minScale) + this.minScale,
+                scaleZ: Math.random() * (this.maxScale - this.minScale) + this.minScale,
                 object: new MyRock(this.scene, 16, 8)
             });
         }
