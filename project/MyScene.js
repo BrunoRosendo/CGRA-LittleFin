@@ -77,7 +77,7 @@ export class MyScene extends CGFscene {
         this.sphere = new MySphere(this, 16, 8);
         this.cylinder = new MyCylinder(this, 12);
         this.fish = new MyFish(this);
-        this.floor = new MySeaFloor(this, 20, 50, 1.0, 0.7);
+        this.floor = new MySeaFloor(this, 20, 50, 1.0, 0.7, 3, 0, 0);
         this.rock = new MyRock(this, 16, 8, 3);
         this.rockSet = new MyRockSet(this, 10, 1, 0.2, 0.01);
 
@@ -123,9 +123,10 @@ export class MyScene extends CGFscene {
         this.displayMyCubeMap = true;
         this.displaySphere = false;
         this.displayCylinder = false;
+        this.displayFloor = true;
         this.displayFish = false;
-        this.displayRock = true;
-        this.displayRockSet = true;
+        this.displayRock = false;
+        this.displayRockSet = false;
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -218,6 +219,10 @@ export class MyScene extends CGFscene {
         this.pushMatrix();
 
         // ---- BEGIN Primitive drawing section
+        if (this.displayFloor) {
+            this.floor.display();
+        }
+
         if (this.displayPyramid) {
             this.pyramidAppearance.apply();
             this.pyramid.display();
@@ -235,13 +240,11 @@ export class MyScene extends CGFscene {
         }
 
         if (this.displayFish) {
-            this.floor.display();
             this.translate(0, 3, 0);
             this.fish.display();
         }
 
         if (this.displayRock) {
-            this.floor.display();
             this.translate(0, 0.5, 0);
             this.scale(0.5, 0.5, 0.5);
 

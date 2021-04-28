@@ -15,10 +15,13 @@ export class MyRockSet extends CGFobject {
         // Right now, rocks are floating and possibly overlapping [FIX]
         this.rocks = [];
         for (let i = 0; i < numRocks; ++i) {
+            const x = Math.random() * 2 * this.radius - this.radius;
+            const maxZ = Math.sqrt(this.radius ** 2 - x**2);
+
             this.rocks.push({
                 orientation: Math.floor(Math.random() * Math.PI),
-                posX: Math.random() * 2 * this.radius - this.radius / 2,
-                posZ: Math.random() * 2 - 1,  // Y is always 0
+                posX: x,
+                posZ: Math.random() * 2 * maxZ - maxZ,  // Y is always 0
                 scaleX: Math.random() * (this.maxScale - this.minScale) + this.minScale,
                 scaleY: Math.random() * (this.maxScale - this.minScale) + this.minScale,
                 scaleZ: Math.random() * (this.maxScale - this.minScale) + this.minScale,
