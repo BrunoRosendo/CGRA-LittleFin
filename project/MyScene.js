@@ -5,6 +5,7 @@ import { MySphere } from "./MySphere.js";
 import { MyCubeMap } from "./MyCubeMap.js";
 import { MyCylinder } from "./MyCylinder.js";
 import { MyFish } from "./MyFish.js";
+import { MyPier } from "./MyPier.js";
 
 /**
 * MyScene
@@ -73,6 +74,7 @@ export class MyScene extends CGFscene {
         this.sphere = new MySphere(this, 16, 8);
         this.cylinder = new MyCylinder(this, 12);
         this.fish = new MyFish(this);
+        this.pier = new MyPier(this);
 
 
         this.defaultAppearance = new CGFappearance(this);
@@ -110,7 +112,8 @@ export class MyScene extends CGFscene {
         this.displayMyCubeMap = true;
         this.displaySphere = false;
         this.displayCylinder = false;
-        this.displayFish = true;
+        this.displayFish = false;
+        this.displayPier = true;
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -222,6 +225,10 @@ export class MyScene extends CGFscene {
         if (this.displayFish) {
             this.translate(0, 3, 0);
             this.fish.display();
+        }
+
+        if(this.displayPier){
+            this.pier.display();
         }
 
         this.setActiveShader(this.defaultShader);
