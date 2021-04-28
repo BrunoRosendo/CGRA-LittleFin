@@ -38,7 +38,9 @@ export class MySeaFloor extends CGFobject {
 
         this.scene.setActiveShader(this.shader);
         this.plane.display();
+
         this.scene.setActiveShader(this.scene.defaultShader);
+        this.scene.defaultAppearance.apply();
 
         this.scene.popMatrix();
         this.scene.pushMatrix();

@@ -6,6 +6,7 @@ import { MyCubeMap } from "./MyCubeMap.js";
 import { MyCylinder } from "./MyCylinder.js";
 import { MyFish } from "./MyFish.js";
 import { MySeaFloor } from "./MySeaFloor.js";
+import { MyRock } from "./MyRock.js";
 
 /**
 * MyScene
@@ -76,6 +77,7 @@ export class MyScene extends CGFscene {
         this.cylinder = new MyCylinder(this, 12);
         this.fish = new MyFish(this);
         this.floor = new MySeaFloor(this, 20, 50, 1.0, 0.7);
+        this.rock = new MyRock(this, 16, 8);
 
 
         this.defaultAppearance = new CGFappearance(this);
@@ -106,14 +108,21 @@ export class MyScene extends CGFscene {
         this.cylinderAppearance.setShininess(120);
         this.cylinderAppearance.loadTexture('./images/earth.jpg');
 
+        this.rockMaterial = new CGFappearance(this);
+        this.rockMaterial.setAmbient(0.05, 0.05, 0.05, 1.0);
+        this.rockMaterial.setDiffuse(0.4, 0.4, 0.4, 1.0);
+        this.rockMaterial.setSpecular(0.7, 0.7, 0.7, 1.0);
+        this.rockMaterial.setShininess(20);
+
 
         // Objects connected to MyInterface
-        this.displayAxis = true;
+        this.displayAxis = false;
         this.displayPyramid = false;
         this.displayMyCubeMap = true;
         this.displaySphere = false;
         this.displayCylinder = false;
-        this.displayFish = true;
+        this.displayFish = false;
+        this.displayRock = true;
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -226,6 +235,13 @@ export class MyScene extends CGFscene {
             this.floor.display();
             this.translate(0, 3, 0);
             this.fish.display();
+        }
+
+        if (this.displayRock) {
+            this.floor.display();
+            this.translate(0, 1, 0);
+            this.rockMaterial.apply();
+            this.rock.display();
         }
 
         this.setActiveShader(this.defaultShader);

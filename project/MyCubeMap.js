@@ -110,6 +110,7 @@ export class MyCubeMap extends CGFobject {
             this.quad.display();
         }
 
+        this.scene.defaultAppearance.apply();
         this.scene.pushMatrix();
         this.scene.popMatrix();
     }
