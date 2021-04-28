@@ -7,6 +7,7 @@ import { MyCylinder } from "./MyCylinder.js";
 import { MyFish } from "./MyFish.js";
 import { MySeaFloor } from "./MySeaFloor.js";
 import { MyRock } from "./MyRock.js";
+import { MyRockSet } from './MyRockSet.js';
 
 /**
 * MyScene
@@ -78,6 +79,7 @@ export class MyScene extends CGFscene {
         this.fish = new MyFish(this);
         this.floor = new MySeaFloor(this, 20, 50, 1.0, 0.7);
         this.rock = new MyRock(this, 16, 8);
+        this.rockSet = new MyRockSet(this, 10);
 
 
         this.defaultAppearance = new CGFappearance(this);
@@ -123,6 +125,7 @@ export class MyScene extends CGFscene {
         this.displayCylinder = false;
         this.displayFish = false;
         this.displayRock = true;
+        this.displayRockSet = true;
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -239,9 +242,20 @@ export class MyScene extends CGFscene {
 
         if (this.displayRock) {
             this.floor.display();
-            this.translate(0, 1, 0);
+            this.translate(0, 0.5, 0);
+            this.scale(0.5, 0.5, 0.5);
+
             this.rockMaterial.apply();
             this.rock.display();
+            this.defaultAppearance.apply();
+
+            this.popMatrix();
+            this.pushMatrix();
+        }
+
+        if (this.displayRockSet) {
+            this.translate(-2, 0, -2);
+            this.rockSet.display();
         }
 
         this.setActiveShader(this.defaultShader);
