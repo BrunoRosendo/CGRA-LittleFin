@@ -56,5 +56,8 @@ export class MySeaFloor extends CGFobject {
 
         this.scene.translate(this.nestPosX, 0, this.nestPosZ);
         this.nest.display();
+
+        this.scene.popMatrix();
+        this.scene.pushMatrix();
     }
 }

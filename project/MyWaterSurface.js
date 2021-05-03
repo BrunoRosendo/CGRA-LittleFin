@@ -3,10 +3,12 @@ import { MyPlane } from "../tp5/MyPlane.js";
 
 
 export class MyWaterSurface extends CGFobject{
-    constructor(scene){
+    constructor(scene, size){
         super(scene);
         this.waterSurf = new MyPlane(scene, 50);
+
         this.scene = scene;
+        this.size = size;
         
         this.waterShader = new CGFshader(this.scene.gl, "shaders/water.vert", "shaders/water.frag");
         this.waterShader.setUniformsValues({ timeFactor: 0, uSampler2: 1, distortionScale: 0.3 });
@@ -24,11 +26,19 @@ export class MyWaterSurface extends CGFobject{
         this.waterShader.setUniformsValues({timeFactor: t % 200000});
     }
 
-    display(){    
-        this.scene.setActiveShader(this.waterShader);
+    display(){
+        //this.scene.scale(this.size, 0, this.size);
+        this.scene.rotate(Math.PI/2, 1, 0, 0);
+
         this.waterTexture.bind();
         this.waterDistortionTexture.bind(1);
+        this.scene.setActiveShader(this.waterShader);
+
         this.waterSurf.display();
+
         this.scene.setActiveShader(this.scene.defaultShader);
+
+        this.scene.popMatrix();
+        this.scene.pushMatrix();
     }
 }

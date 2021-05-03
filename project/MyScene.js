@@ -69,7 +69,7 @@ export class MyScene extends CGFscene {
         this.selectedTexture = 1;
         this.textureIds = { 'Coords': 0, 'Sky': 1, 'Mountain': 2 };
 
-        this.scaleFactor = 1.0;
+        this.scaleFactor = 0.5;
         this.speedFactor = 1.0;
 
         // Initialize scene objects
@@ -79,11 +79,11 @@ export class MyScene extends CGFscene {
         this.sphere = new MySphere(this, 16, 8);
         this.cylinder = new MyCylinder(this, 12);
         this.fish = new MyFish(this);
-        this.floor = new MySeaFloor(this, 20, 50, 1.0, 0.7, 3, 0, 0);
+        this.floor = new MySeaFloor(this, 20, 50, 1.0, 0.7, 3, -15, -15);
         this.rock = new MyRock(this, 16, 8, 3);
         this.rockSet = new MyRockSet(this, 10, 1, 0.2, 0.01);
         this.pier = new MyPier(this);
-        this.waterSurf = new MyWaterSurface(this);
+        this.waterSurf = new MyWaterSurface(this, 50);
 
         this.defaultAppearance = new CGFappearance(this);
         this.defaultAppearance.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -123,14 +123,14 @@ export class MyScene extends CGFscene {
         // Objects connected to MyInterface
         this.displayAxis = false;
         this.displayPyramid = false;
-        this.displayMyCubeMap = true;
+        this.displayMyCubeMap = false;
         this.displaySphere = false;
         this.displayCylinder = false;
-        this.displayFloor = true;
+        this.displayFloor = false;
         this.displayFish = false;
         this.displayRock = false;
         this.displayRockSet = false;
-        this.displayPier = true;
+        this.displayPier = false;
         this.displayWaterSurface = true;
     }
     initLights() {
@@ -272,6 +272,7 @@ export class MyScene extends CGFscene {
         }
 
         if(this.displayWaterSurface){
+            //this.translate(0, 10, 0);
             this.waterSurf.display();
         }
 
