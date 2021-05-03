@@ -8,6 +8,7 @@ import { MyFish } from "./MyFish.js";
 import { MySeaFloor } from "./MySeaFloor.js";
 import { MyRock } from "./MyRock.js";
 import { MyRockSet } from './MyRockSet.js';
+import { MyPier } from "./MyPier.js";
 
 /**
 * MyScene
@@ -80,6 +81,7 @@ export class MyScene extends CGFscene {
         this.floor = new MySeaFloor(this, 20, 50, 1.0, 0.7, 3, 0, 0);
         this.rock = new MyRock(this, 16, 8, 3);
         this.rockSet = new MyRockSet(this, 10, 1, 0.2, 0.01);
+        this.pier = new MyPier(this);
 
 
         this.defaultAppearance = new CGFappearance(this);
@@ -127,6 +129,7 @@ export class MyScene extends CGFscene {
         this.displayFish = false;
         this.displayRock = false;
         this.displayRockSet = false;
+        this.displayPier = true;
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -259,6 +262,10 @@ export class MyScene extends CGFscene {
         if (this.displayRockSet) {
             this.translate(-2, 0, -2);
             this.rockSet.display();
+        }
+        
+        if (this.displayPier) {
+            this.pier.display();
         }
 
         this.setActiveShader(this.defaultShader);
