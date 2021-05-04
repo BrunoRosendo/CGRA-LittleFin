@@ -54,8 +54,13 @@ export class MyRockSet extends CGFobject {
             }
         }
         if (chosenRock === -1) return null;
+
         this.rocks[chosenRock].visible = false;
-        return this.rocks[chosenRock];
+
+        // return a copy
+        const returnableRock = this.rocks.slice()[chosenRock];
+        returnableRock.material = this.rockMaterial;
+        return returnableRock;
     }
 
     display() {

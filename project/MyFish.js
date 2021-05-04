@@ -162,10 +162,14 @@ export class MyFish extends CGFobject {
         this.scene.scale(0.15,0.15,0.15);
         this.rightEye.display();
 
+        this.scene.popMatrix();
+        this.scene.pushMatrix();
+
         if (this.rock) {
-            //this.translate()
+            this.scene.translate(0, -0.2, 1.3);
             this.scene.scale(this.rock.scaleX, this.rock.scaleY, this.rock.scaleZ);
             this.scene.rotate(this.rock.orientation, 0, 1, 0);
+            this.rock.material.apply();
             this.rock.object.display();
         }
         
