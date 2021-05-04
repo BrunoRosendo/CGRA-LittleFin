@@ -33,9 +33,6 @@ export class MySeaFloor extends CGFobject {
         this.material.loadTexture('./images/underwater/sand.png');
 
         this.filter = new CGFtexture(this.scene, "./images/underwater/sandMap.png");
-
-        // This nest is still very basic [FIX]
-        this.nest = new MyRockSet(this.scene, 500, nestRadius);
     }
 
     display() {
@@ -55,12 +52,6 @@ export class MySeaFloor extends CGFobject {
         this.scene.defaultAppearance.apply();
 
         this.scene.popMatrix();
-        this.scene.pushMatrix();
-
-        this.scene.translate(this.nestPosX, 0, this.nestPosZ);
-        this.nest.display();
-        this.scene.translate(-this.nestPosX, 0, -this.nestPosZ);
-
         this.scene.pushMatrix();
     }
 }

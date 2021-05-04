@@ -6,6 +6,7 @@ import { MyRock } from "./MyRock.js";
 import { MyRockSet } from './MyRockSet.js';
 import { MyPier } from "./MyPier.js";
 import { MyWaterSurface } from "./MyWaterSurface.js";
+import { MyNest } from "./MyNest.js";
 
 /**
 * MyScene
@@ -82,9 +83,10 @@ export class MyScene extends CGFscene {
         this.mycubemap = new MyCubeMap(this, this.cubeMaptextures[this.selectedTexture]);
         this.fish = new MyFish(this);
         this.floor = new MySeaFloor(this, 20, 50, 1.0, 0.7, 3, 0, -13);
-        this.rockSet = new MyRockSet(this, 30, 15, 0.4, 0.01);
+        this.rockSet = new MyRockSet(this, 50, 20, 0.4, 0.01);
         this.pier = new MyPier(this, 15, 20, 10, 0, -3, 0);
         this.waterSurf = new MyWaterSurface(this, 50);
+        this.nest = new MyNest(this, 5, 0, -14);
 
         this.defaultAppearance = new CGFappearance(this);
         this.defaultAppearance.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -103,6 +105,7 @@ export class MyScene extends CGFscene {
         this.displayRockSet = true;
         this.displayPier = true;
         this.displayWaterSurface = true;
+        this.displayNest = true;
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -188,6 +191,10 @@ export class MyScene extends CGFscene {
         // ---- BEGIN Primitive drawing section
         if (this.displayFloor) {
             this.floor.display();
+        }
+
+        if (this.displayNest) {
+            this.nest.display();
         }
 
         if (this.displayFish) {
