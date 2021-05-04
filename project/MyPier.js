@@ -32,5 +32,9 @@ export class MyPier {
         //BackLeft
         this.scene.translate(-this.width/2,0,-this.length/2);
         this.cyllinder.display();
+
+        this.scene.popMatrix();
+        this.scene.translate(-this.xPosition, -this.yPosition, -this.zPosition);
+        this.scene.pushMatrix();
     }
 }

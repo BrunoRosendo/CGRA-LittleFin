@@ -219,20 +219,7 @@ export class MyScene extends CGFscene {
         }
 
         if (this.displayFish) {
-            this.translate(0, 3, 0);
             this.fish.display();
-            this.translate(0, -3, 0);
-            this.popMatrix();
-            this.pushMatrix();
-        }
-
-        if (this.displayRock) {
-            this.translate(5, 0.5, 3);
-            this.scale(0.7, 0.7, 0.7);
-
-            this.rockMaterial.apply();
-            this.rock.display();
-            this.defaultAppearance.apply();
             this.popMatrix();
             this.pushMatrix();
         }

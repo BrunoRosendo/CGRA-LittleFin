@@ -1,7 +1,7 @@
 export class MyMovingObject {
 
-    minHeight = 0;
-    maxHeight = 2;
+    minHeight = 1;
+    maxHeight = 8;
 
     constructor(scene, object) {
         this.scene = scene;
@@ -52,23 +52,18 @@ export class MyMovingObject {
     reset() {
         this.velocity = 0;
         this.verticalVelocity = 0;
-        this.position = [0, this.maxHeight, 0];
+        this.position = [0, this.maxHeight / 2, 0];
         this.orientation = 0;
     }
 
     display() {
-        // // Animate based on user input
+        // Animate based on user input
         this.scene.translate(...this.position);
         this.scene.rotate(this.orientation, 0, 1, 0);
-
-        // Put the object in the right position. May change with the type of object
-        // this.scene.translate(0, 0, -0.5);
-        // this.scene.rotate(Math.PI / 2, 1, 0, 0);
 
         this.object.display();
         this.scene.popMatrix();
         this.scene.pushMatrix();
-
     }
 }
 
