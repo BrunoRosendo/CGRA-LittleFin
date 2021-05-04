@@ -2,15 +2,15 @@ import {CGFappearance} from '../lib/CGF.js';
 import { MyCylinder } from "./MyCylinder.js";
 
 export class MyPier {
-    constructor(scene) {
+    constructor(scene, width, length, height, xPosition, yPosition, zPosition) {
         this.scene = scene;
         this.cyllinder = new MyCylinder(scene, 20);
-        this.width = 10;
-        this.length = 20;
-        this.height = 10;
-        this.xPosition = -5;
-        this.yPosition = -20;
-        this.zPosition = -20;
+        this.width = width;
+        this.length = length;
+        this.height = height;
+        this.xPosition = xPosition;
+        this.yPosition = yPosition;
+        this.zPosition = zPosition;
 
         this.material = new CGFappearance(scene);
         this.material.setAmbient(1.0, 1.0, 1.0, 1.0);

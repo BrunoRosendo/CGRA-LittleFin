@@ -79,10 +79,10 @@ export class MyScene extends CGFscene {
         this.sphere = new MySphere(this, 16, 8);
         this.cylinder = new MyCylinder(this, 12);
         this.fish = new MyFish(this);
-        this.floor = new MySeaFloor(this, 20, 50, 1.0, 0.7, 3, -15, -15);
+        this.floor = new MySeaFloor(this, 20, 50, 1.0, 0.7, 3, 0, -13);
         this.rock = new MyRock(this, 16, 8, 3);
         this.rockSet = new MyRockSet(this, 10, 1, 0.2, 0.01);
-        this.pier = new MyPier(this);
+        this.pier = new MyPier(this, 15, 20, 10, 0, -3, 0);
         this.waterSurf = new MyWaterSurface(this, 50);
 
         this.defaultAppearance = new CGFappearance(this);
@@ -123,14 +123,14 @@ export class MyScene extends CGFscene {
         // Objects connected to MyInterface
         this.displayAxis = false;
         this.displayPyramid = false;
-        this.displayMyCubeMap = false;
+        this.displayMyCubeMap = true;
         this.displaySphere = false;
         this.displayCylinder = false;
-        this.displayFloor = false;
-        this.displayFish = false;
+        this.displayFloor = true;
+        this.displayFish = true;
         this.displayRock = false;
         this.displayRockSet = false;
-        this.displayPier = false;
+        this.displayPier = true;
         this.displayWaterSurface = true;
     }
     initLights() {
@@ -272,7 +272,7 @@ export class MyScene extends CGFscene {
         }
 
         if(this.displayWaterSurface){
-            //this.translate(0, 10, 0);
+            this.translate(0, 10, 0);
             this.waterSurf.display();
         }
 
