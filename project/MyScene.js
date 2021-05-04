@@ -82,8 +82,7 @@ export class MyScene extends CGFscene {
         this.mycubemap = new MyCubeMap(this, this.cubeMaptextures[this.selectedTexture]);
         this.fish = new MyFish(this);
         this.floor = new MySeaFloor(this, 20, 50, 1.0, 0.7, 3, 0, -13);
-        this.rock = new MyRock(this, 16, 8, 3);
-        this.rockSet = new MyRockSet(this, 10, 1, 0.2, 0.01);
+        this.rockSet = new MyRockSet(this, 30, 15, 0.4, 0.01);
         this.pier = new MyPier(this, 15, 20, 10, 0, -3, 0);
         this.waterSurf = new MyWaterSurface(this, 50);
 
@@ -93,12 +92,6 @@ export class MyScene extends CGFscene {
         this.defaultAppearance.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.defaultAppearance.setEmission(0, 0, 0, 1);
         this.defaultAppearance.setShininess(120);
-
-        this.rockMaterial = new CGFappearance(this);
-        this.rockMaterial.setAmbient(0.05, 0.05, 0.05, 1.0);
-        this.rockMaterial.setDiffuse(0.4, 0.4, 0.4, 1.0);
-        this.rockMaterial.setSpecular(0.7, 0.7, 0.7, 1.0);
-        this.rockMaterial.setShininess(20);
 
 
         // Objects connected to MyInterface
@@ -204,20 +197,7 @@ export class MyScene extends CGFscene {
             this.pushMatrix();
         }
 
-        if (this.displayRock) {
-            this.translate(5, 0.5, 3);
-            this.scale(0.7, 0.7, 0.7);
-
-            this.rockMaterial.apply();
-            this.rock.display();
-            this.defaultAppearance.apply();
-
-            this.popMatrix();
-            this.pushMatrix();
-        }
-
         if (this.displayRockSet) {
-            this.translate(-2, 0, -2);
             this.rockSet.display();
         }
         

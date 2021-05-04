@@ -1,4 +1,4 @@
-import { CGFobject } from '../lib/CGF.js';
+import { CGFobject, CGFappearance } from '../lib/CGF.js';
 import { MyRock } from './MyRock.js'
 
 export class MyRockSet extends CGFobject {
@@ -12,6 +12,12 @@ export class MyRockSet extends CGFobject {
     }
 
     init(numRocks) {
+        this.rockMaterial = new CGFappearance(this.scene);
+        this.rockMaterial.setAmbient(0.05, 0.05, 0.05, 1.0);
+        this.rockMaterial.setDiffuse(0.4, 0.4, 0.4, 1.0);
+        this.rockMaterial.setSpecular(0.7, 0.7, 0.7, 1.0);
+        this.rockMaterial.setShininess(20);
+
         // Right now, rocks are floating and possibly overlapping [FIX]
         this.rocks = [];
         for (let i = 0; i < numRocks; ++i) {
@@ -19,9 +25,11 @@ export class MyRockSet extends CGFobject {
             const maxZ = Math.sqrt(this.radius ** 2 - x**2);
 
             this.rocks.push({
+                visible: true,
                 orientation: Math.floor(Math.random() * Math.PI),
                 posX: x,
-                posZ: Math.random() * 2 * maxZ - maxZ,  // Y is always 0
+                posY: 0,
+                posZ: Math.random() * 2 * maxZ - maxZ,
                 scaleX: Math.random() * (this.maxScale - this.minScale) + this.minScale,
                 scaleY: Math.random() * (this.maxScale - this.minScale) + this.minScale,
                 scaleZ: Math.random() * (this.maxScale - this.minScale) + this.minScale,
@@ -32,10 +40,11 @@ export class MyRockSet extends CGFobject {
 
     display() {
         this.scene.pushMatrix();
-        this.scene.rockMaterial.apply();
+        this.rockMaterial.apply();
 
         this.rocks.forEach(rock => {
-            this.scene.translate(rock.posX, 0, rock.posZ);
+            if (!rock.visible) return;
+            this.scene.translate(rock.posX, rock.posY, rock.posZ);
             this.scene.scale(rock.scaleX, rock.scaleY, rock.scaleZ);
             this.scene.rotate(rock.orientation, 0, 1, 0);
             rock.object.display();
