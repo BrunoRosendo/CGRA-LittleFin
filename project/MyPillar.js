@@ -18,6 +18,8 @@ export class MyPillar extends CGFobject {
     this.material.setDiffuse(1.0, 1.0, 1.0, 1.0);
     this.material.setSpecular(1.0, 1.0, 1.0, 1.0);
     this.material.setShininess(5);
+
+    // https://snappygoat.com/s/?q=bestof%3Atrunk+tree+wood+nature+tree+bark+bark+texture+branch
     this.material.loadTexture('./images/underwater/tree.jpeg');
   }
 

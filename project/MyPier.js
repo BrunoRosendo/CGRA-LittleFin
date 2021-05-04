@@ -1,4 +1,3 @@
-import {CGFappearance} from '../lib/CGF.js';
 import { MyPillar } from "./MyPillar.js";
 
 export class MyPier {

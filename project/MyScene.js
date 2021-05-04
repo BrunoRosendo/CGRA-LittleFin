@@ -61,9 +61,18 @@ export class MyScene extends CGFscene {
             new CGFtexture(this, './images/test_cubemap/ny.png')
         ];
 
-        this.cubeMaptextures = [this.coordTextures, this.skyTextures, this.mountainTextures];
-        this.selectedTexture = 1;
-        this.textureIds = { 'Coords': 0, 'Sky': 1, 'Mountain': 2 };
+        this.waterTextures = [
+            new CGFtexture(this, './images/underwater_cubemap/top.jpg'),
+            new CGFtexture(this, './images/underwater_cubemap/front.jpg'),
+            new CGFtexture(this, './images/underwater_cubemap/right.jpg'),
+            new CGFtexture(this, './images/underwater_cubemap/back.jpg'),
+            new CGFtexture(this, './images/underwater_cubemap/left.jpg'),
+            new CGFtexture(this, './images/underwater_cubemap/bottom.jpg')
+        ];
+
+        this.cubeMaptextures = [this.coordTextures, this.skyTextures, this.mountainTextures, this.waterTextures];
+        this.selectedTexture = 3;
+        this.textureIds = { 'Coords': 0, 'Sky': 1, 'Mountain': 2, 'Water': 3};
 
         this.scaleFactor = 0.5;
         this.speedFactor = 1.0;
