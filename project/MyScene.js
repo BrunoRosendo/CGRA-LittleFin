@@ -6,12 +6,18 @@ import { MyRock } from "./MyRock.js";
 import { MyRockSet } from './MyRockSet.js';
 import { MyPier } from "./MyPier.js";
 import { MyWaterSurface } from "./MyWaterSurface.js";
+import { MyMovingObject } from "./MyMovingObject.js";
+
 
 /**
 * MyScene
 * @constructor
 */
 export class MyScene extends CGFscene {
+
+    turnSpeed = 0.1;
+    moveSpeed = 0.005;
+
     constructor() {
         super();
     }
@@ -80,7 +86,7 @@ export class MyScene extends CGFscene {
         // Initialize scene objects
         this.axis = new CGFaxis(this);
         this.mycubemap = new MyCubeMap(this, this.cubeMaptextures[this.selectedTexture]);
-        this.fish = new MyFish(this);
+        this.fish = new MyMovingObject(this, new MyFish(this));
         this.floor = new MySeaFloor(this, 20, 50, 1.0, 0.7, 3, 0, -13);
         this.rock = new MyRock(this, 16, 8, 3);
         this.rockSet = new MyRockSet(this, 10, 1, 0.2, 0.01);
@@ -145,18 +151,31 @@ export class MyScene extends CGFscene {
     checkKeys() {
         // Check for key codes e.g. in https://keycode.info/
         if (this.gui.isKeyPressed("KeyW")) {
+            this.fish.accelerate(this.moveSpeed);
         }
 
         if (this.gui.isKeyPressed("KeyS")) {
+            this.fish.accelerate(-this.moveSpeed);
         }
 
         if (this.gui.isKeyPressed("KeyA")) {
+            this.fish.turn(this.turnSpeed);
         }
 
         if (this.gui.isKeyPressed("KeyD")) {
+            this.fish.turn(-this.turnSpeed);
         }
 
         if (this.gui.isKeyPressed("KeyR")) {
+            this.fish.reset();
+        }
+
+        if (this.gui.isKeyPressed("KeyP")) {
+            this.fish.ascend();
+        }
+
+        if (this.gui.isKeyPressed("KeyL")) {
+            this.fish.descend();
         }
 
     }
@@ -195,12 +214,15 @@ export class MyScene extends CGFscene {
         // ---- BEGIN Primitive drawing section
         if (this.displayFloor) {
             this.floor.display();
+            this.popMatrix();
+            this.pushMatrix();
         }
 
         if (this.displayFish) {
             this.translate(0, 3, 0);
             this.fish.display();
             this.translate(0, -3, 0);
+            this.popMatrix();
             this.pushMatrix();
         }
 
@@ -211,7 +233,6 @@ export class MyScene extends CGFscene {
             this.rockMaterial.apply();
             this.rock.display();
             this.defaultAppearance.apply();
-
             this.popMatrix();
             this.pushMatrix();
         }
@@ -219,15 +240,21 @@ export class MyScene extends CGFscene {
         if (this.displayRockSet) {
             this.translate(-2, 0, -2);
             this.rockSet.display();
+            this.popMatrix();
+            this.pushMatrix();
         }
         
         if (this.displayPier) {
             this.pier.display();
+            this.popMatrix();
+            this.pushMatrix();
         }
 
         if(this.displayWaterSurface){
             this.translate(0, 10, 0);
             this.waterSurf.display();
+            this.popMatrix();
+            this.pushMatrix();
         }
 
         this.setActiveShader(this.defaultShader);
