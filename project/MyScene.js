@@ -1,9 +1,5 @@
-import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFtexture, CGFshader } from "../lib/CGF.js";
-import { MyMovingObject } from "./MyMovingObject.js"
-import { MyPyramid } from "./MyPyramid.js";
-import { MySphere } from "./MySphere.js";
+import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFtexture } from "../lib/CGF.js";
 import { MyCubeMap } from "./MyCubeMap.js";
-import { MyCylinder } from "./MyCylinder.js";
 import { MyFish } from "./MyFish.js";
 import { MySeaFloor } from "./MySeaFloor.js";
 import { MyRock } from "./MyRock.js";
@@ -74,10 +70,7 @@ export class MyScene extends CGFscene {
 
         // Initialize scene objects
         this.axis = new CGFaxis(this);
-        this.pyramid = new MyMovingObject(this, new MyPyramid(this, 10, 3));
         this.mycubemap = new MyCubeMap(this, this.cubeMaptextures[this.selectedTexture]);
-        this.sphere = new MySphere(this, 16, 8);
-        this.cylinder = new MyCylinder(this, 12);
         this.fish = new MyFish(this);
         this.floor = new MySeaFloor(this, 20, 50, 1.0, 0.7, 3, 0, -13);
         this.rock = new MyRock(this, 16, 8, 3);
@@ -92,27 +85,6 @@ export class MyScene extends CGFscene {
         this.defaultAppearance.setEmission(0, 0, 0, 1);
         this.defaultAppearance.setShininess(120);
 
-
-        this.pyramidAppearance = new CGFappearance(this);
-        this.pyramidAppearance.setAmbient(0.3, 0.3, 0.3, 1);
-        this.pyramidAppearance.setDiffuse(0.7, 0.7, 0.7, 1);
-        this.pyramidAppearance.setSpecular(0.0, 0.0, 0.0, 1);
-        this.pyramidAppearance.setShininess(120);
-
-        this.sphereAppearance = new CGFappearance(this);
-        this.sphereAppearance.setAmbient(0.3, 0.3, 0.3, 1);
-        this.sphereAppearance.setDiffuse(0.7, 0.7, 0.7, 1);
-        this.sphereAppearance.setSpecular(0.0, 0.0, 0.0, 1);
-        this.sphereAppearance.setShininess(120);
-        this.sphereAppearance.loadTexture('./images/earth.jpg');
-
-        this.cylinderAppearance = new CGFappearance(this);
-        this.cylinderAppearance.setAmbient(0.3, 0.3, 0.3, 1);
-        this.cylinderAppearance.setDiffuse(0.7, 0.7, 0.7, 1);
-        this.cylinderAppearance.setSpecular(0.0, 0.0, 0.0, 1);
-        this.cylinderAppearance.setShininess(120);
-        this.cylinderAppearance.loadTexture('./images/earth.jpg');
-
         this.rockMaterial = new CGFappearance(this);
         this.rockMaterial.setAmbient(0.05, 0.05, 0.05, 1.0);
         this.rockMaterial.setDiffuse(0.4, 0.4, 0.4, 1.0);
@@ -122,14 +94,11 @@ export class MyScene extends CGFscene {
 
         // Objects connected to MyInterface
         this.displayAxis = false;
-        this.displayPyramid = false;
         this.displayMyCubeMap = true;
-        this.displaySphere = false;
-        this.displayCylinder = false;
         this.displayFloor = true;
         this.displayFish = true;
-        this.displayRock = false;
-        this.displayRockSet = false;
+        this.displayRock = true;
+        this.displayRockSet = true;
         this.displayPier = true;
         this.displayWaterSurface = true;
     }
@@ -167,28 +136,18 @@ export class MyScene extends CGFscene {
     checkKeys() {
         // Check for key codes e.g. in https://keycode.info/
         if (this.gui.isKeyPressed("KeyW")) {
-            if (this.displayPyramid)
-                this.pyramid.accelerate(0.005);
         }
 
         if (this.gui.isKeyPressed("KeyS")) {
-            if (this.displayPyramid)
-                this.pyramid.accelerate(-0.005);
         }
 
         if (this.gui.isKeyPressed("KeyA")) {
-            if (this.displayPyramid)
-                this.pyramid.turn(0.1);
         }
 
         if (this.gui.isKeyPressed("KeyD")) {
-            if (this.displayPyramid)
-                this.pyramid.turn(-0.1);
         }
 
         if (this.gui.isKeyPressed("KeyR")) {
-            if (this.displayPyramid)
-                this.pyramid.reset();
         }
 
     }
@@ -229,30 +188,16 @@ export class MyScene extends CGFscene {
             this.floor.display();
         }
 
-        if (this.displayPyramid) {
-            this.pyramidAppearance.apply();
-            this.pyramid.display();
-        }
-
-        // This sphere does not have defined texture coordinates
-        if (this.displaySphere) {
-            this.sphereAppearance.apply();
-            this.sphere.display();
-        }
-
-        if (this.displayCylinder) {
-            this.cylinderAppearance.apply();
-            this.cylinder.display();
-        }
-
         if (this.displayFish) {
             this.translate(0, 3, 0);
             this.fish.display();
+            this.translate(0, -3, 0);
+            this.pushMatrix();
         }
 
         if (this.displayRock) {
-            this.translate(0, 0.5, 0);
-            this.scale(0.5, 0.5, 0.5);
+            this.translate(5, 0.5, 3);
+            this.scale(0.7, 0.7, 0.7);
 
             this.rockMaterial.apply();
             this.rock.display();
