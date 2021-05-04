@@ -45,6 +45,9 @@ export class MyRockSet extends CGFobject {
         for (let i = 0; i < this.rocks.length; ++i) {
             const rock = this.rocks[i];
             const distance = euclideanDistance(posX, posZ, rock.posX, rock.posZ);
+
+            if (distance >= 1.5) continue;
+
             if (!minDistance || distance < minDistance) {
                 chosenRock = i;
                 minDistance = distance;
@@ -60,6 +63,7 @@ export class MyRockSet extends CGFobject {
         this.rockMaterial.apply();
 
         this.rocks.forEach(rock => {
+            if (!rock.visible) return;
             this.scene.translate(rock.posX, rock.posY, rock.posZ);
             this.scene.scale(rock.scaleX, rock.scaleY, rock.scaleZ);
             this.scene.rotate(rock.orientation, 0, 1, 0);
