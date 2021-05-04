@@ -2,7 +2,6 @@ import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFtexture } from "../lib/
 import { MyCubeMap } from "./MyCubeMap.js";
 import { MyFish } from "./MyFish.js";
 import { MySeaFloor } from "./MySeaFloor.js";
-import { MyRock } from "./MyRock.js";
 import { MyRockSet } from './MyRockSet.js';
 import { MyPier } from "./MyPier.js";
 import { MyWaterSurface } from "./MyWaterSurface.js";
@@ -222,17 +221,6 @@ export class MyScene extends CGFscene {
             this.translate(0, 3, 0);
             this.fish.display();
             this.translate(0, -3, 0);
-            this.popMatrix();
-            this.pushMatrix();
-        }
-
-        if (this.displayRock) {
-            this.translate(5, 0.5, 3);
-            this.scale(0.7, 0.7, 0.7);
-
-            this.rockMaterial.apply();
-            this.rock.display();
-            this.defaultAppearance.apply();
             this.popMatrix();
             this.pushMatrix();
         }
