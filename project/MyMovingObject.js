@@ -72,5 +72,3 @@ export class MyMovingObject {
         this.scene.pushMatrix();
     }
 }
-
-

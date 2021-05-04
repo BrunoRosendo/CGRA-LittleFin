@@ -78,7 +78,7 @@ export class MyScene extends CGFscene {
 
         this.scaleFactor = 0.5;
         this.speedFactor = 1.0;
-        
+
         this.turnSpeed = 0.2;
         this.moveSpeed = 0.01;
 
@@ -177,8 +177,14 @@ export class MyScene extends CGFscene {
         }
 
         if (this.gui.isKeyPressed("KeyC")) {
-            if (!this.fish.isOnLowerLimit() || this.fish.object.rock) return;
-            this.fish.object.rock = this.rockSet.takeClosestRock(this.fish.position[0], this.fish.position[2]);
+            if (!this.fish.isOnLowerLimit()) return;
+            if (this.fish.object.rock) {
+                this.nest.addRock(this.fish);
+            } else
+                this.fish.object.rock = this.rockSet.takeClosestRock(
+                    this.fish.position[0],
+                    this.fish.position[2]
+                );
         }
 
     }
