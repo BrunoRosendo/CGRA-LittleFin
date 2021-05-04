@@ -27,7 +27,7 @@ export class MyWaterSurface extends CGFobject{
     }
 
     display(){
-        this.scene.scale(this.size, 0, this.size);
+        this.scene.scale(this.size, this.size, this.size);
         this.scene.rotate(Math.PI/2, 1, 0, 0);
 
         this.waterTexture.bind();
