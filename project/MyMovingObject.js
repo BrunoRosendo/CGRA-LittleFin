@@ -2,12 +2,11 @@
 
 export class MyMovingObject {
 
-    minHeight = 1;
-    maxHeight = 8;
-
     constructor(scene, object) {
         this.scene = scene;
         this.object = object;
+        this.minHeight = 1;
+        this.maxHeight = 8;
         this.reset();
     }
     initBuffers() {

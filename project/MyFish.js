@@ -6,10 +6,6 @@ import { toRads } from './utilities/algebra.js';
 
 export class MyFish extends CGFobject {
 
-    tailFrequency = 1;
-    tailSpeedFrequency = 0;
-    finFrequency = 1.5;
-
     constructor(scene) {
         super(scene);
         this.init();
@@ -27,6 +23,10 @@ export class MyFish extends CGFobject {
         this.rightEye = new MySphere(this.scene, 5, 5);
 
         this.bodyShader = new CGFshader(this.scene.gl, "shaders/fishBody.vert", "shaders/fishBody.frag");
+
+        this.tailFrequency = 0.7;
+        this.tailSpeedFrequency = 0;
+        this.finFrequency = 1.3;
 
         this.initMaterials();
     }
