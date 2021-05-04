@@ -1,3 +1,5 @@
+// TODO: MY MOVING FISH SHOULD BE A SUBCLASS OF MYMOVINGOBJECT
+
 export class MyMovingObject {
 
     minHeight = 1;
