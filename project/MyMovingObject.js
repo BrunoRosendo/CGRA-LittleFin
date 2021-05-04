@@ -32,11 +32,19 @@ export class MyMovingObject {
         }
         this.position[2] += this.scene.speedFactor * Math.cos(this.orientation) * this.velocity;
 
-        this.object.update(t);
+        this.object.update(t, this.velocity, this.turnLeft, this.turnRight);
+        this.turnLeft = false;
+        this.turnRight = false;
     }
 
     turn(val) {
         this.orientation += val;
+        if(val > 0){
+            this.turnLeft = true;
+        }
+        else{
+            this.turnRight = true;
+        }
     }
 
     accelerate(val) {
@@ -56,6 +64,9 @@ export class MyMovingObject {
         this.verticalVelocity = 0;
         this.position = [0, this.maxHeight / 2, 0];
         this.orientation = 0;
+        this.turnLeft = false;
+        this.turnRight = false;
+        this.object.update(0, 0, 0, 0);
     }
 
     isOnLowerLimit() {
