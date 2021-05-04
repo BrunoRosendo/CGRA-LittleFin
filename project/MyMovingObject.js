@@ -56,6 +56,10 @@ export class MyMovingObject {
         this.orientation = 0;
     }
 
+    isOnLowerLimit() {
+        return this.position[1] === this.minHeight;
+    }
+
     display() {
         // Animate based on user input
         this.scene.translate(...this.position);

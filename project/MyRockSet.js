@@ -1,5 +1,6 @@
 import { CGFobject, CGFappearance } from '../lib/CGF.js';
 import { MyRock } from './MyRock.js'
+import { euclideanDistance } from './utilities/algebra.js';
 
 export class MyRockSet extends CGFobject {
 
@@ -38,12 +39,27 @@ export class MyRockSet extends CGFobject {
         }
     }
 
+    takeClosestRock(posX, posZ) {
+        let chosenRock = -1;
+        let minDistance = null;
+        for (let i = 0; i < this.rocks.length; ++i) {
+            const rock = this.rocks[i];
+            const distance = euclideanDistance(posX, posZ, rock.posX, rock.posZ);
+            if (!minDistance || distance < minDistance) {
+                chosenRock = i;
+                minDistance = distance;
+            }
+        }
+        if (chosenRock === -1) return null;
+        this.rocks[chosenRock].visible = false;
+        return this.rocks[chosenRock];
+    }
+
     display() {
         this.scene.pushMatrix();
         this.rockMaterial.apply();
 
         this.rocks.forEach(rock => {
-            if (!rock.visible) return;
             this.scene.translate(rock.posX, rock.posY, rock.posZ);
             this.scene.scale(rock.scaleX, rock.scaleY, rock.scaleZ);
             this.scene.rotate(rock.orientation, 0, 1, 0);

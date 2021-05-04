@@ -174,6 +174,11 @@ export class MyScene extends CGFscene {
             this.fish.descend();
         }
 
+        if (this.gui.isKeyPressed("KeyC")) {
+            if (!this.fish.isOnLowerLimit() || this.fish.object.rock) return;
+            this.fish.object.rock = this.rockSet.takeClosestRock();
+        }
+
     }
 
     display() {

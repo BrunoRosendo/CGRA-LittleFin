@@ -161,6 +161,10 @@ export class MyFish extends CGFobject {
         this.scene.translate(-0.6,0.1,.7);
         this.scene.scale(0.15,0.15,0.15);
         this.rightEye.display();
+
+        if (this.rock) {
+            // display rock in mouth
+        }
         
         this.scene.defaultAppearance.apply();
         this.scene.popMatrix();
