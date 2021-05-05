@@ -5,7 +5,7 @@ import { MyPlane } from "../tp5/MyPlane.js";
 export class MyWaterSurface extends CGFobject{
     constructor(scene, size){
         super(scene);
-        this.waterSurf = new MyPlane(scene, 50);
+        this.waterSurf = new MyPlane(scene, 100);
 
         this.scene = scene;
         this.size = size;
