@@ -1,11 +1,11 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFtexture } from "../lib/CGF.js";
 import { MyCubeMap } from "./MyCubeMap.js";
-import { MyFish } from "./MyFish.js";
 import { MySeaFloor } from "./MySeaFloor.js";
 import { MyRockSet } from './MyRockSet.js';
 import { MyPier } from "./MyPier.js";
 import { MyWaterSurface } from "./MyWaterSurface.js";
 import { MyNest } from "./MyNest.js";
+import { MyFlora } from "./MyFlora.js";
 import { MyMovingFish } from "./MyMovingFish.js";
 
 
@@ -91,6 +91,7 @@ export class MyScene extends CGFscene {
         this.pier = new MyPier(this, 15, 5, 10, 14, -3, -2);
         this.waterSurf = new MyWaterSurface(this, 50);
         this.nest = new MyNest(this, 5, 0, -14);
+        this.flora = new MyFlora(this, 20, {x: 0, z: -14, r: 5});
 
         this.defaultAppearance = new CGFappearance(this);
         this.defaultAppearance.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -105,11 +106,11 @@ export class MyScene extends CGFscene {
         this.displayMyCubeMap = true;
         this.displayFloor = true;
         this.displayFish = true;
-        this.displayRock = true;
         this.displayRockSet = true;
         this.displayPier = true;
         this.displayWaterSurface = true;
         this.displayNest = true;
+        this.displayFlora = true;
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -254,6 +255,10 @@ export class MyScene extends CGFscene {
             this.waterSurf.display();
             this.popMatrix();
             this.pushMatrix();
+        }
+
+        if(this.displayFlora){
+            this.flora.display();
         }
 
         this.setActiveShader(this.defaultShader);
