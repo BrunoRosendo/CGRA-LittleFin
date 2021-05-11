@@ -50,6 +50,8 @@ export class MyFish extends CGFobject {
         this.bodyMaterial.setDiffuse(1.0, 1.0, 1.0, 1);
         this.bodyMaterial.setSpecular(1.0, 1.0, 1.0, 1);
         this.bodyMaterial.setShininess(120);
+        
+        // https://www.publicdomainpictures.net/pt/view-image.php?image=283612&picture=fundo-de-padrao-de-escalas-de-peixe
         this.bodyMaterial.loadTexture('./images/fish/body.jpg');
     }
 
