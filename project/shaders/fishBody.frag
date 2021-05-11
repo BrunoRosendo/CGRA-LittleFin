@@ -3,6 +3,7 @@ precision highp float;
 #endif
 
 varying vec2 vTextureCoord;
+varying vec4 vFinalColor;
 varying vec3 vertexPosition;
 
 uniform sampler2D uSampler;
