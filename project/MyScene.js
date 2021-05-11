@@ -14,10 +14,6 @@ import { MyMovingObject } from "./MyMovingObject.js";
 * @constructor
 */
 export class MyScene extends CGFscene {
-
-    turnSpeed = 0.1;
-    moveSpeed = 0.005;
-
     constructor() {
         super();
     }
@@ -82,6 +78,9 @@ export class MyScene extends CGFscene {
 
         this.scaleFactor = 0.5;
         this.speedFactor = 1.0;
+
+        this.turnSpeed = 0.2;
+        this.moveSpeed = 0.01;
 
         // Initialize scene objects
         this.axis = new CGFaxis(this);
@@ -163,6 +162,10 @@ export class MyScene extends CGFscene {
 
         if (this.gui.isKeyPressed("KeyR")) {
             this.fish.reset();
+            if (this.fish.object.rock) {
+                this.rockSet.putRockBack();
+                delete this.fish.object.rock;
+            }
         }
 
         if (this.gui.isKeyPressed("KeyP")) {
@@ -171,6 +174,17 @@ export class MyScene extends CGFscene {
 
         if (this.gui.isKeyPressed("KeyL")) {
             this.fish.descend();
+        }
+
+        if (this.gui.isKeyPressed("KeyC")) {
+            if (!this.fish.isOnLowerLimit()) return;
+            if (this.fish.object.rock) {
+                this.nest.addRock(this.fish);
+            } else
+                this.fish.object.rock = this.rockSet.takeClosestRock(
+                    this.fish.position[0],
+                    this.fish.position[2]
+                );
         }
 
     }
@@ -218,9 +232,7 @@ export class MyScene extends CGFscene {
         }
 
         if (this.displayFish) {
-            this.translate(0, 3, 0);
             this.fish.display();
-            this.translate(0, -3, 0);
             this.popMatrix();
             this.pushMatrix();
         }

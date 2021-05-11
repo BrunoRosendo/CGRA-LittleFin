@@ -1,11 +1,12 @@
-export class MyMovingObject {
+// TODO: MY MOVING FISH SHOULD BE A SUBCLASS OF MYMOVINGOBJECT
 
-    minHeight = 0;
-    maxHeight = 2;
+export class MyMovingObject {
 
     constructor(scene, object) {
         this.scene = scene;
         this.object = object;
+        this.minHeight = 1;
+        this.maxHeight = 8;
         this.reset();
     }
     initBuffers() {
@@ -60,27 +61,24 @@ export class MyMovingObject {
     reset() {
         this.velocity = 0;
         this.verticalVelocity = 0;
-        this.position = [0, this.maxHeight, 0];
+        this.position = [0, this.maxHeight / 2, 0];
         this.orientation = 0;
         this.turnLeft = false;
         this.turnRight = false;
         this.object.update(0, 0, 0, 0);
     }
 
+    isOnLowerLimit() {
+        return this.position[1] === this.minHeight;
+    }
+
     display() {
-        // // Animate based on user input
+        // Animate based on user input
         this.scene.translate(...this.position);
         this.scene.rotate(this.orientation, 0, 1, 0);
-
-        // Put the object in the right position. May change with the type of object
-        // this.scene.translate(0, 0, -0.5);
-        // this.scene.rotate(Math.PI / 2, 1, 0, 0);
 
         this.object.display();
         this.scene.popMatrix();
         this.scene.pushMatrix();
-
     }
 }
-
-

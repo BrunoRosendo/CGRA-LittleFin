@@ -6,10 +6,6 @@ import { toRads } from './utilities/algebra.js';
 
 export class MyFish extends CGFobject {
 
-    tailFrequency = 1;
-    tailSpeedFrequency = 0;
-    finFrequency = 1.5;
-
     constructor(scene) {
         super(scene);
         this.init();
@@ -27,6 +23,10 @@ export class MyFish extends CGFobject {
         this.rightEye = new MySphere(this.scene, 5, 5);
 
         this.bodyShader = new CGFshader(this.scene.gl, "shaders/fishBody.vert", "shaders/fishBody.frag");
+
+        this.tailFrequency = 0.7;
+        this.tailSpeedFrequency = 0;
+        this.finFrequency = 1.3;
 
         this.initMaterials();
     }
@@ -173,6 +173,17 @@ export class MyFish extends CGFobject {
         this.scene.scale(0.15, 0.15, 0.15);
         this.rightEye.display();
 
+        this.scene.popMatrix();
+        this.scene.pushMatrix();
+
+        if (this.rock) {
+            this.scene.translate(0, -0.2, 1.3);
+            this.scene.scale(this.rock.scaleX, this.rock.scaleY, this.rock.scaleZ);
+            this.scene.rotate(this.rock.orientation, 0, 1, 0);
+            this.rock.material.apply();
+            this.rock.object.display();
+        }
+        
         this.scene.defaultAppearance.apply();
         this.scene.popMatrix();
         this.scene.pushMatrix();

@@ -5,7 +5,7 @@ import { MyPlane } from "../tp5/MyPlane.js";
 export class MyWaterSurface extends CGFobject{
     constructor(scene, size){
         super(scene);
-        this.waterSurf = new MyPlane(scene, 50);
+        this.waterSurf = new MyPlane(scene, 100);
 
         this.scene = scene;
         this.size = size;
@@ -27,7 +27,7 @@ export class MyWaterSurface extends CGFobject{
     }
 
     display(){
-        this.scene.scale(this.size, 0, this.size);
+        this.scene.scale(this.size, this.size, this.size);
         this.scene.rotate(Math.PI/2, 1, 0, 0);
 
         this.waterTexture.bind();
