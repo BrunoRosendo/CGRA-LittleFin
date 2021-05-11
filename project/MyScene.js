@@ -6,6 +6,7 @@ import { MyPier } from "./MyPier.js";
 import { MyWaterSurface } from "./MyWaterSurface.js";
 import { MyNest } from "./MyNest.js";
 import { MyFlora } from "./MyFlora.js";
+import { MyMovingFish } from "./MyMovingFish.js";
 
 
 /**
@@ -90,7 +91,7 @@ export class MyScene extends CGFscene {
         this.pier = new MyPier(this, 15, 5, 10, 14, -3, -2);
         this.waterSurf = new MyWaterSurface(this, 50);
         this.nest = new MyNest(this, 5, 0, -14);
-        this.flora = new MyFlora(this, 10);
+        this.flora = new MyFlora(this, 20, {x: 0, z: -14, r: 5});
 
         this.defaultAppearance = new CGFappearance(this);
         this.defaultAppearance.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -101,15 +102,14 @@ export class MyScene extends CGFscene {
 
 
         // Objects connected to MyInterface
-        this.displayAxis = true;
+        this.displayAxis = false;
         this.displayMyCubeMap = true;
         this.displayFloor = true;
         this.displayFish = true;
-        this.displayRock = true;
-        this.displayRockSet = false;
+        this.displayRockSet = true;
         this.displayPier = true;
         this.displayWaterSurface = true;
-        this.displayNest = false;
+        this.displayNest = true;
         this.displayFlora = true;
     }
     initLights() {

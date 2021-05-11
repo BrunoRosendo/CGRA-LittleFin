@@ -1,15 +1,14 @@
 import { MyAlgaeFormation } from './MyAlgaeFormation.js';
 
 export class MyFlora {
-    static minX = -25;
-    static maxX = 25;
-    static minZ = -25;
-    static maxZ = 25;
-    static minY = 2;
-    static maxY = this.minY + 1;
-    constructor(scene, noFormations) {
+    static minX = -20;
+    static maxX = 20;
+    static minZ = -20;
+    static maxZ = 20;
+    constructor(scene, noFormations, nestStats) {
         this.scene = scene;
         this.noFormations = noFormations;
+        this.nestStats = nestStats;
         this.formations = this.initFormations(noFormations);
     }
 
@@ -17,9 +16,15 @@ export class MyFlora {
         let formations = [];
         for (let i = 0; i < noFormations; i++) {
             let x = Math.floor(Math.random() * (MyFlora.maxX - MyFlora.minX) + MyFlora.minX);
-            let y = Math.floor(Math.random() * (MyFlora.maxY - MyFlora.minY) + MyFlora.minY);
             let z = Math.floor(Math.random() * (MyFlora.maxZ - MyFlora.minZ) + MyFlora.minZ);
-            formations.push(new MyAlgaeFormation(this.scene, [x,y,z]));
+
+            if (x >= this.nestStats.x - this.nestStats.r
+                && x <= this.nestStats.x + this.nestStats.r
+                && z >= this.nestStats.z - this.nestStats.r
+                && z <= this.nestStats.z + this.nestStats.r)
+                x += 2.1 * this.nestStats.r * Math.pow(-1, i);
+
+            formations.push(new MyAlgaeFormation(this.scene, [x,0,z]));
         }
         return formations;
     }
