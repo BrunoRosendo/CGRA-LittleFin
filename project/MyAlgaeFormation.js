@@ -3,22 +3,22 @@ import { MyAlga } from './MyAlga.js';
 export class MyAlgaeFormation {
 
     static maxAlgae = 10;
-    static maxRadius = 2;
+    static maxRadius = 1;
     constructor(scene, pos) {
         this.scene = scene;
         this.pos = pos;
-        initAlgae();
+        this.initAlgae();
     }
 
     initAlgae() {
-        noAlgae = Math.floor(Math.random() * maxAlgae) + 1;
+        this.noAlgae = Math.floor(Math.random() * MyAlgaeFormation.maxAlgae) + 1;
 
         this.algae = [];
         this.algaePos = [];
-        for (i = 0; i < noAlgae; i++) {
+        for (let i = 0; i < this.noAlgae; i++) {
             this.algae.push(new MyAlga(this.scene));
-            radius = Math.random() * maxRadius;
-            angle = Math.random() * 2*Math.PI;
+            let radius = Math.random() * MyAlgaeFormation.maxRadius;
+            let angle = Math.random() * 2*Math.PI;
             this.algaePos.push([radius*Math.cos(angle), radius*Math.sin(angle)]);
         }
     }
@@ -26,16 +26,18 @@ export class MyAlgaeFormation {
     display(){
         this.scene.translate(...this.pos);
         this.scene.pushMatrix();
-        for(i = 0; i < noAlgae; i++){
-            alga = this.algae[i];
-            algaPos = this.algaePos[i];
+        for(let i = 0; i < this.noAlgae; i++){
+            let alga = this.algae[i];
+            let algaPos = this.algaePos[i];
             this.scene.translate(algaPos[0], 0, algaPos[1]);
-            this.alga.display();
+            alga.display();
             this.scene.popMatrix();
-            this.scene.pusMatrix()
+            this.scene.pushMatrix()
         }
-
         this.scene.popMatrix();
+        
+        this.scene.popMatrix();
+        this.scene.pushMatrix();
     }
 
 }
