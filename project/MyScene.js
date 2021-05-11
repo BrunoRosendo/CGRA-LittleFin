@@ -6,7 +6,7 @@ import { MyRockSet } from './MyRockSet.js';
 import { MyPier } from "./MyPier.js";
 import { MyWaterSurface } from "./MyWaterSurface.js";
 import { MyNest } from "./MyNest.js";
-import { MyMovingObject } from "./MyMovingObject.js";
+import { MyMovingFish } from "./MyMovingFish.js";
 
 
 /**
@@ -85,7 +85,7 @@ export class MyScene extends CGFscene {
         // Initialize scene objects
         this.axis = new CGFaxis(this);
         this.mycubemap = new MyCubeMap(this, this.cubeMaptextures[this.selectedTexture]);
-        this.fish = new MyMovingObject(this, new MyFish(this));
+        this.fish = new MyMovingFish(this, 1, 8);
         this.floor = new MySeaFloor(this, 20, 50, 1.0, 0.7, 3, 0, -13);
         this.rockSet = new MyRockSet(this, 50, 20, 0.4, 0.01);
         this.pier = new MyPier(this, 15, 5, 10, 14, -3, -2);
