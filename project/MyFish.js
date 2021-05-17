@@ -33,17 +33,17 @@ export class MyFish extends CGFobject {
 
     }
 
-    initColor(color){
-        
+    initColor(color) {
+
         if (color == null) {
             this.color = [0.8, 0.1, 0.1, 1.0];
         }
-        else{
+        else {
             this.color = color;
         }
     }
 
-    initMaterials( textureURL) {
+    initMaterials(textureURL) {
         this.redMaterial = new CGFappearance(this.scene);
         this.redMaterial.setAmbient(...this.color);
         this.redMaterial.setDiffuse(...this.color);
@@ -78,7 +78,7 @@ export class MyFish extends CGFobject {
         this.bodyShader.setUniformsValues({ bodyTextRatio: bodyRatio, fishColor: this.color });
     }
 
-    update(t, speed, turnLeft, turnRight) {
+    update(t, speed = 0.2, turnLeft = false, turnRight = false) {
         this.t = t / 150;
         this.tailSpeedFrequency = speed;
         this.turnLeft = turnLeft;

@@ -93,7 +93,9 @@ export class MyScene extends CGFscene {
         this.waterSurf = new MyWaterSurface(this, 50);
         this.nest = new MyNest(this, 5, 0, -14);
         this.flora = new MyFlora(this, 20, { x: 0, z: -14, r: 5 });
-        this.myAnimatedFish1 = new MyAnimatedFish(this, 5, 5, 5, [0.1,0.2,0.7,1.0], 0.4);
+        this.myAnimatedFish1 = new MyAnimatedFish(this, -4, -4, 5, [0.1, 0.2, 0.7, 1.0], 0.4);
+        this.myAnimatedFish2 = new MyAnimatedFish(this, 5, 5, 10, [0.7, 0.2, 0.1, 1.0], 0.8);
+        this.myAnimatedFish = [this.myAnimatedFish1, this.myAnimatedFish2]
 
         this.defaultAppearance = new CGFappearance(this);
         this.defaultAppearance.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -105,16 +107,17 @@ export class MyScene extends CGFscene {
 
         // Objects connected to MyInterface
         this.displayAxis = false;
-        this.displayMyCubeMap = false;
-        this.displayFloor = false;
+        this.displayMyCubeMap = true;
+        this.displayFloor = true;
         this.displayFish = false;
         this.displayRockSet = false;
         this.displayPier = false;
-        this.displayWaterSurface = false;
+        this.displayWaterSurface = true;
         this.displayNest = false;
         this.displayFlora = false;
         this.displayMyAnimatedFish = true;
     }
+
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
@@ -122,6 +125,7 @@ export class MyScene extends CGFscene {
         this.lights[0].enable();
         this.lights[0].update();
     }
+
     initCameras() {
         this.camera = new CGFcamera(1.8, 0.1, 500, vec3.fromValues(2, 2, 2), vec3.fromValues(0, 2, 0));
     }
@@ -139,6 +143,7 @@ export class MyScene extends CGFscene {
         t = t * this.speedFactor;
         this.checkKeys();
         this.fish.update(t);
+        this.myAnimatedFish.forEach(fish=>fish.update(t));
         this.waterSurf.update(t);
     }
 
@@ -266,7 +271,9 @@ export class MyScene extends CGFscene {
         }
 
         if (this.displayMyAnimatedFish) {
-            this.myAnimatedFish1.display();
+            this.myAnimatedFish.forEach(fish =>{
+                fish.display();
+            })
         }
 
         this.setActiveShader(this.defaultShader);
