@@ -34,7 +34,7 @@ export class MyFish extends CGFobject {
     }
 
     initColor(color) {
-            this.color = color || [0.9, 0.1, 0.1, 1.0];
+            this.color = color || [0.87, 0.1, 0.1, 1.0];
     }
 
     initMaterials(textureURL) {
@@ -52,10 +52,10 @@ export class MyFish extends CGFobject {
         this.eyeMaterial.loadTexture('./images/fish/eye.png');  // change image
 
         this.bodyMaterial = new CGFappearance(this.scene);
-        this.bodyMaterial.setAmbient(...this.color, 1);
-        this.bodyMaterial.setDiffuse(...this.color, 1);
-        this.bodyMaterial.setSpecular(...this.color, 1);
-        this.bodyMaterial.setShininess(120);
+        this.bodyMaterial.setAmbient(...this.color);
+        this.bodyMaterial.setDiffuse(...this.color);
+        this.bodyMaterial.setSpecular(...this.color);
+        this.bodyMaterial.setShininess(20);
 
         if (textureURL == null) {
             // https://www.publicdomainpictures.net/pt/view-image.php?image=283612&picture=fundo-de-padrao-de-escalas-de-peixe
@@ -69,7 +69,10 @@ export class MyFish extends CGFobject {
     initShaders(bodyRatio) {
         bodyRatio = -1 + 2 * bodyRatio;
         this.bodyShader = new CGFshader(this.scene.gl, "shaders/fishBody.vert", "shaders/fishBody.frag");
-        this.bodyShader.setUniformsValues({ bodyTextRatio: bodyRatio, fishColor: this.color });
+        this.bodyShader.setUniformsValues({ bodyTextRatio: bodyRatio, fishColor: this.color , useTexture: true});
+
+        this.redShader = new CGFshader(this.scene.gl, "shaders/fishBody.vert", "shaders/fishBody.frag");
+        this.redShader.setUniformsValues({bodyTextRatio: bodyRatio, fishColor: this.color, useTexture: false});
     }
 
     update(t, speed = 0.2, turnLeft = false, turnRight = false) {
@@ -125,6 +128,7 @@ export class MyFish extends CGFobject {
         this.scene.rotate(Math.PI / 2, 0, 1, 0);
         this.scene.scale(0.6, 0.6, .6);
         this.redMaterial.apply();
+        this.scene.setActiveShader(this.redShader);
         this.tail.display();
 
         this.scene.popMatrix();
@@ -182,6 +186,7 @@ export class MyFish extends CGFobject {
         this.scene.rotate(toRads(120), 0, 1, 0);
         this.scene.scale(0.15, 0.15, 0.15);
         this.eyeMaterial.apply();
+        this.scene.setActiveShader(this.scene.defaultShader);
         this.leftEye.display();
 
         this.scene.popMatrix();

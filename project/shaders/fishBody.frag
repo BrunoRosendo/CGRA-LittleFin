@@ -9,9 +9,10 @@ varying vec3 vertexPosition;
 uniform sampler2D uSampler;
 uniform float bodyTextRatio;
 uniform vec4 fishColor;
+uniform bool useTexture;
 
 void main() {
-	if(vertexPosition.x < bodyTextRatio)
+	if (vertexPosition.x < bodyTextRatio && useTexture)
         gl_FragColor = texture2D(uSampler, vTextureCoord);
 
     else
