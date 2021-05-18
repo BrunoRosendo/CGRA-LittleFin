@@ -12,7 +12,7 @@ uniform vec4 fishColor;
 
 void main() {
 	if(vertexPosition.x < bodyTextRatio)
-        gl_FragColor = vFinalColor * texture2D(uSampler, vTextureCoord);
+        gl_FragColor = texture2D(uSampler, vTextureCoord);
 
     else
         gl_FragColor = vFinalColor * fishColor;

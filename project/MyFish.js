@@ -6,7 +6,7 @@ import { toRads } from './utilities/algebra.js';
 
 export class MyFish extends CGFobject {
 
-    constructor(scene, color = null, textureURL = null, bodyRatio = 0.6) {
+    constructor(scene, color, textureURL, bodyRatio = 0.6) {
         super(scene);
         this.scene = scene;
         this.init();
@@ -34,13 +34,7 @@ export class MyFish extends CGFobject {
     }
 
     initColor(color) {
-
-        if (color == null) {
-            this.color = [0.8, 0.1, 0.1, 1.0];
-        }
-        else {
-            this.color = color;
-        }
+            this.color = color || [0.9, 0.1, 0.1, 1.0];
     }
 
     initMaterials(textureURL) {
