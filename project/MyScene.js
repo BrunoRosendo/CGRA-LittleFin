@@ -109,12 +109,12 @@ export class MyScene extends CGFscene {
         this.displayAxis = false;
         this.displayMyCubeMap = true;
         this.displayFloor = true;
-        this.displayFish = false;
-        this.displayRockSet = false;
-        this.displayPier = false;
+        this.displayFish = true;
+        this.displayRockSet = true;
+        this.displayPier = true;
         this.displayWaterSurface = true;
-        this.displayNest = false;
-        this.displayFlora = false;
+        this.displayNest = true;
+        this.displayFlora = true;
         this.displayMyAnimatedFish = true;
     }
 
