@@ -3,6 +3,8 @@ import { MyPlane } from "../tp5/MyPlane.js";
 
 
 export class MyWaterSurface extends CGFobject{
+    timeInitialized = false;
+    firstTime;
     constructor(scene, size){
         super(scene);
         this.waterSurf = new MyPlane(scene, 100);
@@ -23,7 +25,14 @@ export class MyWaterSurface extends CGFobject{
     }
 
     update(t){
-        this.waterShader.setUniformsValues({timeFactor: t / 100 % 100 });
+        if(!this.timeInitialized){
+            this.firstTime = t;
+            this.timeInitialized = true;
+        }
+        t = t - this.firstTime;
+        // console.log(t/100);
+        // console.log(t/100%100);
+        this.waterShader.setUniformsValues({timeFactor: t / 100 });
     }
 
     display(){

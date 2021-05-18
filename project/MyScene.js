@@ -89,7 +89,7 @@ export class MyScene extends CGFscene {
         this.fish = new MyMovingFish(this, 1, 8);
         this.floor = new MySeaFloor(this, 20, 50, 1.0, 0.7, 3, 0, -13);
         this.rockSet = new MyRockSet(this, 50, 20, 0.4, 0.01);
-        this.pier = new MyPier(this, 15, 5, 10, 14, -3, -2);
+        this.pier = new MyPier(this, 22, 5, 20, 14, -3, -2);
         this.waterSurf = new MyWaterSurface(this, 50);
         this.nest = new MyNest(this, 5, 0, -14);
         this.flora = new MyFlora(this, 20, { x: 0, z: -14, r: 5 });
@@ -106,15 +106,15 @@ export class MyScene extends CGFscene {
 
 
         // Objects connected to MyInterface
-        this.displayAxis = false;
+        this.displayAxis = true;
         this.displayMyCubeMap = true;
         this.displayFloor = true;
-        this.displayFish = false;
-        this.displayRockSet = false;
-        this.displayPier = false;
+        this.displayFish = true;
+        this.displayRockSet = true;
+        this.displayPier = true;
         this.displayWaterSurface = true;
-        this.displayNest = false;
-        this.displayFlora = false;
+        this.displayNest = true;
+        this.displayFlora = true;
         this.displayMyAnimatedFish = true;
     }
 

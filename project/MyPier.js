@@ -3,7 +3,7 @@ import { MyPillar } from "./MyPillar.js";
 export class MyPier {
     constructor(scene, width, length, height, xPosition, yPosition, zPosition) {
         this.scene = scene;
-        this.cyllinder = new MyPillar(scene, 20, width, length, height);
+        this.cyllinder = new MyPillar(scene, 20, height);
 
         this.length = length;
         this.width = width;
