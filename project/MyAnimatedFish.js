@@ -1,21 +1,19 @@
 import { MyFish } from "./MyFish.js";
 
 export class MyAnimatedFish extends MyFish {
-    radius = 5;
-    lastTime = null;
-    posX;
-    posZ;
-    constructor(scene, centerX, centerZ, period, color = null, ratio = null, texture = null) {
+    constructor(scene, centerX, centerZ, period, color, ratio, texture) {
         super(scene, color, texture, ratio);
         this.centerX = centerX;
         this.centerZ = centerZ;
-        this.ang = 0;
         this.angVel = 2 * Math.PI / period;
         this.period = period;
+
+        this.ang = 0;
+        this.radius = 5;
     }
 
     update(t) {
-        if (this.lastTime == null) {
+        if (!this.lastTime) {
             this.lastTime = t;
         }
         let diff = t - this.lastTime;
@@ -42,5 +40,4 @@ export class MyAnimatedFish extends MyFish {
         this.scene.popMatrix();
         this.scene.pushMatrix();
     }
-
 }

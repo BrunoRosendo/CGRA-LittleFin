@@ -152,7 +152,6 @@ export class MyScene extends CGFscene {
     }
 
     checkKeys() {
-        /*
         // Check for key codes e.g. in https://keycode.info/
         if (this.gui.isKeyPressed("KeyW")) {
             this.fish.accelerate(this.moveSpeed);
@@ -196,7 +195,7 @@ export class MyScene extends CGFscene {
                     this.fish.position[2]
                 );
         }
-*/
+
     }
 
     display() {
