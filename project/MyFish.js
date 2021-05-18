@@ -6,9 +6,13 @@ import { toRads } from './utilities/algebra.js';
 
 export class MyFish extends CGFobject {
 
-    constructor(scene) {
+    constructor(scene, color = null, textureURL = null, bodyRatio = 0.6) {
         super(scene);
+        this.scene = scene;
         this.init();
+        this.initColor(color);
+        this.initMaterials(textureURL)
+        this.initShaders(bodyRatio);
     }
 
     init() {
@@ -22,20 +26,28 @@ export class MyFish extends CGFobject {
         this.leftEye = new MySphere(this.scene, 5, 5);
         this.rightEye = new MySphere(this.scene, 5, 5);
 
-        this.bodyShader = new CGFshader(this.scene.gl, "shaders/fishBody.vert", "shaders/fishBody.frag");
 
         this.tailFrequency = 0.7;
         this.tailSpeedFrequency = 0;
         this.finFrequency = 1.3;
 
-        this.initMaterials();
     }
 
-    initMaterials() {
+    initColor(color) {
+
+        if (color == null) {
+            this.color = [0.8, 0.1, 0.1, 1.0];
+        }
+        else {
+            this.color = color;
+        }
+    }
+
+    initMaterials(textureURL) {
         this.redMaterial = new CGFappearance(this.scene);
-        this.redMaterial.setAmbient(0.8, 0.1, 0.1, 1.0);
-        this.redMaterial.setDiffuse(0.8, 0.1, 0.1, 1.0);
-        this.redMaterial.setSpecular(0.9, 0.1, 0.1, 1.0);
+        this.redMaterial.setAmbient(...this.color);
+        this.redMaterial.setDiffuse(...this.color);
+        this.redMaterial.setSpecular(...this.color);
         this.redMaterial.setShininess(20.0);
 
         this.eyeMaterial = new CGFappearance(this.scene);
@@ -46,16 +58,27 @@ export class MyFish extends CGFobject {
         this.eyeMaterial.loadTexture('./images/fish/eye.png');  // change image
 
         this.bodyMaterial = new CGFappearance(this.scene);
-        this.bodyMaterial.setAmbient(1.0, 1.0, 1.0, 1);
-        this.bodyMaterial.setDiffuse(1.0, 1.0, 1.0, 1);
-        this.bodyMaterial.setSpecular(1.0, 1.0, 1.0, 1);
+        this.bodyMaterial.setAmbient(...this.color, 1);
+        this.bodyMaterial.setDiffuse(...this.color, 1);
+        this.bodyMaterial.setSpecular(...this.color, 1);
         this.bodyMaterial.setShininess(120);
-        
-        // https://www.publicdomainpictures.net/pt/view-image.php?image=283612&picture=fundo-de-padrao-de-escalas-de-peixe
-        this.bodyMaterial.loadTexture('./images/fish/body.jpg');
+
+        if (textureURL == null) {
+            // https://www.publicdomainpictures.net/pt/view-image.php?image=283612&picture=fundo-de-padrao-de-escalas-de-peixe
+            this.bodyMaterial.loadTexture('./images/fish/body.jpg');
+        }
+        else {
+            this.bodyMaterial.loadTexture(textureURL);
+        }
     }
 
-    update(t, speed, turnLeft, turnRight) {
+    initShaders(bodyRatio) {
+        bodyRatio = -1 + 2 * bodyRatio;
+        this.bodyShader = new CGFshader(this.scene.gl, "shaders/fishBody.vert", "shaders/fishBody.frag");
+        this.bodyShader.setUniformsValues({ bodyTextRatio: bodyRatio, fishColor: this.color });
+    }
+
+    update(t, speed = 0.2, turnLeft = false, turnRight = false) {
         this.t = t / 150;
         this.tailSpeedFrequency = speed;
         this.turnLeft = turnLeft;
@@ -185,7 +208,7 @@ export class MyFish extends CGFobject {
             this.rock.material.apply();
             this.rock.object.display();
         }
-        
+
         this.scene.defaultAppearance.apply();
         this.scene.popMatrix();
         this.scene.pushMatrix();

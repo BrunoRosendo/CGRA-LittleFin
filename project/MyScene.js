@@ -7,6 +7,7 @@ import { MyWaterSurface } from "./MyWaterSurface.js";
 import { MyNest } from "./MyNest.js";
 import { MyFlora } from "./MyFlora.js";
 import { MyMovingFish } from "./MyMovingFish.js";
+import { MyAnimatedFish } from "./MyAnimatedFish.js";
 
 
 /**
@@ -74,7 +75,7 @@ export class MyScene extends CGFscene {
 
         this.cubeMaptextures = [this.coordTextures, this.skyTextures, this.mountainTextures, this.waterTextures];
         this.selectedTexture = 3;
-        this.textureIds = { 'Coords': 0, 'Sky': 1, 'Mountain': 2, 'Water': 3};
+        this.textureIds = { 'Coords': 0, 'Sky': 1, 'Mountain': 2, 'Water': 3 };
 
         this.scaleFactor = 0.5;
         this.speedFactor = 1.0;
@@ -91,7 +92,10 @@ export class MyScene extends CGFscene {
         this.pier = new MyPier(this, 15, 5, 10, 14, -3, -2);
         this.waterSurf = new MyWaterSurface(this, 50);
         this.nest = new MyNest(this, 5, 0, -14);
-        this.flora = new MyFlora(this, 20, {x: 0, z: -14, r: 5});
+        this.flora = new MyFlora(this, 20, { x: 0, z: -14, r: 5 });
+        this.myAnimatedFish1 = new MyAnimatedFish(this, -4, -4, 5, [0.1, 0.2, 0.7, 1.0], 0.4);
+        this.myAnimatedFish2 = new MyAnimatedFish(this, 5, 5, 10, [0.7, 0.2, 0.1, 1.0], 0.8);
+        this.myAnimatedFish = [this.myAnimatedFish1, this.myAnimatedFish2]
 
         this.defaultAppearance = new CGFappearance(this);
         this.defaultAppearance.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -105,13 +109,15 @@ export class MyScene extends CGFscene {
         this.displayAxis = false;
         this.displayMyCubeMap = true;
         this.displayFloor = true;
-        this.displayFish = true;
-        this.displayRockSet = true;
-        this.displayPier = true;
+        this.displayFish = false;
+        this.displayRockSet = false;
+        this.displayPier = false;
         this.displayWaterSurface = true;
-        this.displayNest = true;
-        this.displayFlora = true;
+        this.displayNest = false;
+        this.displayFlora = false;
+        this.displayMyAnimatedFish = true;
     }
+
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
@@ -119,6 +125,7 @@ export class MyScene extends CGFscene {
         this.lights[0].enable();
         this.lights[0].update();
     }
+
     initCameras() {
         this.camera = new CGFcamera(1.8, 0.1, 500, vec3.fromValues(2, 2, 2), vec3.fromValues(0, 2, 0));
     }
@@ -136,6 +143,7 @@ export class MyScene extends CGFscene {
         t = t * this.speedFactor;
         this.checkKeys();
         this.fish.update(t);
+        this.myAnimatedFish.forEach(fish=>fish.update(t));
         this.waterSurf.update(t);
     }
 
@@ -243,22 +251,28 @@ export class MyScene extends CGFscene {
             this.popMatrix();
             this.pushMatrix();
         }
-        
+
         if (this.displayPier) {
             this.pier.display();
             this.popMatrix();
             this.pushMatrix();
         }
 
-        if(this.displayWaterSurface){
+        if (this.displayWaterSurface) {
             this.translate(0, 10, 0);
             this.waterSurf.display();
             this.popMatrix();
             this.pushMatrix();
         }
 
-        if(this.displayFlora){
+        if (this.displayFlora) {
             this.flora.display();
+        }
+
+        if (this.displayMyAnimatedFish) {
+            this.myAnimatedFish.forEach(fish =>{
+                fish.display();
+            })
         }
 
         this.setActiveShader(this.defaultShader);
