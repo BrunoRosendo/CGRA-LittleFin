@@ -16,8 +16,6 @@ export class MyFish extends CGFobject {
     }
 
     init() {
-        this.t = 0;
-
         this.sphere = new MySphere(this.scene, 10, 10);
         this.tail = new MyTriangle(this.scene);
         this.mohawk = new MyTriangle(this.scene);
@@ -27,10 +25,13 @@ export class MyFish extends CGFobject {
         this.rightEye = new MySphere(this.scene, 5, 5);
 
 
-        this.tailFrequency = 0.7;
-        this.tailSpeedFrequency = 0;
-        this.finFrequency = 1.3;
+        this.tailInitialSpeed = 0.25;
+        this.tailMultiplier = 1;
+        this.tailAngle = 0;
 
+        this.finInitialSpeed = 0.3;
+        this.finMultiplier = 1;
+        this.finAngle = 0;
     }
 
     initColor(color) {
@@ -75,11 +76,37 @@ export class MyFish extends CGFobject {
         this.redShader.setUniformsValues({bodyTextRatio: bodyRatio, fishColor: this.color, useTexture: false});
     }
 
-    update(t, speed = 0.2, turnLeft = false, turnRight = false) {
-        this.t = t / 150;
-        this.tailSpeedFrequency = speed;
-        this.turnLeft = turnLeft;
-        this.turnRight = turnRight;
+    update(t, speed, turnLeft, turnRight) {
+        this.turnLeft = turnLeft || false;
+        this.turnRight = turnRight || false;
+        speed = speed || 0;
+
+        const tailSpeed = this.tailInitialSpeed + speed * 0.8;
+        const finSpeed = this.finInitialSpeed + speed * 0.9;
+
+        t = t / 150;
+
+        const timeDiff = t - this.lastTime || 0;
+        this.lastTime = t;
+
+        if (this.tailAngle > toRads(45)) {
+            this.tailMultiplier = -1;
+            this.tailAngle = toRads(45);
+        } else if (this.tailAngle < toRads(-45)) {
+            this.tailMultiplier = 1;
+            this.tailAngle = toRads(-45);
+        }
+
+        if (this.finAngle > toRads(20)) {
+            this.finMultiplier = -1;
+            this.finAngle = toRads(20);
+        } else if (this.finAngle < toRads(-20)) {
+            this.finMultiplier = 1;
+            this.finAngle = toRads(-20);
+        }
+
+        this.tailAngle += timeDiff * tailSpeed * this.tailMultiplier;
+        this.finAngle += timeDiff * finSpeed * this.finMultiplier;
     }
 
     enableNormalViz() {
@@ -119,9 +146,8 @@ export class MyFish extends CGFobject {
         // Tail
         this.scene.translate(0, 0, -2);
 
-        const tailAngle = toRads(20) * Math.sin(this.t * (this.tailFrequency + 10 * this.tailSpeedFrequency));
         this.scene.translate(0, 0, 1);
-        this.scene.rotate(tailAngle, 0, 1, 0);
+        this.scene.rotate(this.tailAngle, 0, 1, 0);
         this.scene.translate(0, 0, -1);
 
         this.scene.rotate(-Math.PI / 4, 1, 0, 0);
@@ -135,14 +161,12 @@ export class MyFish extends CGFobject {
         this.scene.pushMatrix();
 
         // Left Fin
-        const finAngle = toRads(20) * Math.sin(this.t * this.finFrequency);
-
         this.scene.translate(0.9, -0.4, -0.1);
         this.scene.rotate(Math.PI / 6, 0, 0, 1);
 
         if (!this.turnLeft) {
             this.scene.translate(0, 0.3, 0);
-            this.scene.rotate(finAngle, 0, 0, 1);
+            this.scene.rotate(this.finAngle, 0, 0, 1);
             this.scene.translate(0, -0.3, 0);
         }
 
@@ -160,7 +184,7 @@ export class MyFish extends CGFobject {
 
         if (!this.turnRight) {
             this.scene.translate(0, 0.3, 0);
-            this.scene.rotate(-finAngle, 0, 0, 1);
+            this.scene.rotate(-this.finAngle, 0, 0, 1);
             this.scene.translate(0, -0.3, 0);
         }
 
