@@ -18,6 +18,15 @@ export class MyInterface extends CGFinterface {
 
         //Checkbox element in GUI
         this.gui.add(this.scene, 'displayAxis').name('Display Axis');
+        this.gui.add(this.scene, 'displayMyCubeMap').name('Display cube map');
+        this.gui.add(this.scene, 'displayFloor').name('Display floor');
+        this.gui.add(this.scene, 'displayFish').name('Display fish');
+        this.gui.add(this.scene, 'displayRockSet').name('Display rock set');
+        this.gui.add(this.scene, 'displayPier').name('Display pier');
+        this.gui.add(this.scene, 'displayWaterSurface').name('Display water surface');
+        this.gui.add(this.scene, 'displayNest').name('Display nest');
+        this.gui.add(this.scene, 'displayFlora').name('Display flora');
+        this.gui.add(this.scene, 'displayMyAnimatedFish').name('Display animated fish');
         
         //Dropdown for textures
         this.gui.add(this.scene, 'selectedTexture', this.scene.textureIds).name('Selected Texture').onChange(this.scene.updateMyCubeMapTexture.bind(this.scene));
