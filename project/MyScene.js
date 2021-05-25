@@ -151,6 +151,10 @@ export class MyScene extends CGFscene {
         this.mycubemap.updateAppliedTexture(this.cubeMaptextures[this.selectedTexture]);
     }
 
+    updateSpeedFactor(){
+        this.waterSurf.resetFirstTime();
+    }
+
     checkKeys() {
         // Check for key codes e.g. in https://keycode.info/
         if (this.gui.isKeyPressed("KeyW")) {

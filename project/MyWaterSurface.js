@@ -26,9 +26,11 @@ export class MyWaterSurface extends CGFobject{
     update(t){
         this.firstTime = this.firstTime || t;
         t = t - this.firstTime;
-        // console.log(t/100);
-        // console.log(t/100%100);
         this.waterShader.setUniformsValues({timeFactor: t / 100 });
+    }
+
+    resetFirstTime(){
+        this.firstTime = undefined;
     }
 
     display(){
