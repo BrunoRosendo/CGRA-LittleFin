@@ -1,4 +1,5 @@
 import {CGFobject} from '../lib/CGF.js';
+
 /**
 * MyPyramid
 * @constructor
@@ -77,5 +78,3 @@ export class MyPyramid extends CGFobject {
         this.initNormalVizBuffers();
     }
 }
-
-

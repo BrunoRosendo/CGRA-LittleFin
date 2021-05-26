@@ -1,5 +1,5 @@
 import { CGFappearance, CGFtexture, CGFshader, CGFobject } from "../lib/CGF.js";
-import { MyPlane } from "../tp5/MyPlane.js";
+import { MyPlane } from "./MyPlane.js";
 
 
 export class MyWaterSurface extends CGFobject{

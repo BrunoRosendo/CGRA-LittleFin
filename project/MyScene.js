@@ -139,7 +139,7 @@ export class MyScene extends CGFscene {
         this.setShininess(10.0);
     }
 
-    // called periodically (as per setUpdatePeriod() in init())
+    // Called periodically (as per setUpdatePeriod() in init())
     update(t) {
         t = t * this.speedFactor;
         this.checkKeys();

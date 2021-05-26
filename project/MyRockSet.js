@@ -19,7 +19,6 @@ export class MyRockSet extends CGFobject {
         this.rockMaterial.setSpecular(0.7, 0.7, 0.7, 1.0);
         this.rockMaterial.setShininess(20);
 
-        // Right now, rocks are floating and possibly overlapping [FIX]
         this.rocks = [];
         for (let i = 0; i < numRocks; ++i) {
             const x = Math.random() * 2 * this.radius - this.radius;

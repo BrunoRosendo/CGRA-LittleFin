@@ -39,5 +39,4 @@ export class MyAlgaeFormation {
         this.scene.popMatrix();
         this.scene.pushMatrix();
     }
-
 }

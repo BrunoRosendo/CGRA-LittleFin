@@ -16,7 +16,7 @@ export class MyInterface extends CGFinterface {
         // http://workshop.chromeexperiments.com/examples/gui
         this.gui = new dat.GUI();
 
-        //Checkbox element in GUI
+        // Checkbox element in GUI
         this.gui.add(this.scene, 'displayAxis').name('Display Axis');
         this.gui.add(this.scene, 'displayMyCubeMap').name('Display cube map');
         this.gui.add(this.scene, 'displayFloor').name('Display floor');
@@ -28,7 +28,7 @@ export class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'displayFlora').name('Display flora');
         this.gui.add(this.scene, 'displayMyAnimatedFish').name('Display animated fish');
         
-        //Dropdown for textures
+        // Dropdown for textures
         this.gui.add(this.scene, 'selectedTexture', this.scene.textureIds).name('Selected Texture').onChange(this.scene.updateMyCubeMapTexture.bind(this.scene));
 
         // Slider elements in GUI
@@ -62,7 +62,7 @@ export class MyInterface extends CGFinterface {
     };
 
     isKeyPressed(keyCode) {
-        if (this.activeKeys[keyCode] === true &&
+        if (this.activeKeys[keyCode] &&
                   (keyCode == "keyL" || keyCode == "keyP")) {
                     this.activeKeys[keyCode] = false;
                     return true;
