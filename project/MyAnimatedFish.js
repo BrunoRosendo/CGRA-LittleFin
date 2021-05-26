@@ -6,28 +6,26 @@ export class MyAnimatedFish extends MyFish {
         this.centerX = centerX;
         this.centerZ = centerZ;
         this.angVel = 2 * Math.PI / period;
-        this.period = period;
 
         this.ang = 0;
         this.radius = 5;
     }
 
     update(t) {
-        if (!this.lastTime) {
-            this.lastTime = t;
-        }
-        let diff = t - this.lastTime;
-        this.ang += diff / 1000 * this.angVel;
-        let v = 2 * Math.PI * this.radius * diff / 1000/ this.period;
+        const diff = (t / 150) - this.lastTime || 0;
+
+        this.ang += diff / 6 * this.angVel;
+        const v = this.radius * diff / 6 * this.angVel;
+        
         if (this.ang > 2 * Math.PI) {
             this.ang -= 2 * Math.PI;
         }
-        this.getPos();
+        
+        this.updatePos();
         super.update(t, v, false, true);
-        this.lastTime = t;
     }
 
-    getPos() {
+    updatePos() {
         this.posX = this.centerX + Math.cos(this.ang) * this.radius;
         this.posZ = this.centerZ + Math.sin(this.ang) * this.radius;
     }

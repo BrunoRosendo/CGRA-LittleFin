@@ -13,12 +13,15 @@ export class MyMovingFish extends MyMovingObject {
     update(t) {
         this.position[0] += this.scene.speedFactor * Math.sin(this.orientation) * this.velocity;
         this.position[1] += this.scene.speedFactor * this.verticalVelocity;
+
         if (this.position[1] < this.minHeight) {
             this.position[1] = this.minHeight;
         }
+
         if (this.position[1] > this.maxHeight) {
             this.position[1] = this.maxHeight;
         }
+        
         this.position[2] += this.scene.speedFactor * Math.cos(this.orientation) * this.velocity;
 
         this.object.update(t, this.velocity, this.turnLeft, this.turnRight);

@@ -94,7 +94,7 @@ export class MyScene extends CGFscene {
         this.nest = new MyNest(this, 5, 0, -14);
         this.flora = new MyFlora(this, 20, { x: 0, z: -14, r: 5 });
         this.myAnimatedFish1 = new MyAnimatedFish(this, -4, -4, 5, [0.1, 0.2, 0.7, 1.0], 0.4);
-        this.myAnimatedFish2 = new MyAnimatedFish(this, 5, 5, 10, [0.7, 0.2, 0.1, 1.0], 0.8);
+        this.myAnimatedFish2 = new MyAnimatedFish(this, 5, 5, 10, [0.85, 0.2, 0.1, 1.0], 0.8);
         this.myAnimatedFish = [this.myAnimatedFish1, this.myAnimatedFish2]
 
         this.defaultAppearance = new CGFappearance(this);
@@ -106,7 +106,7 @@ export class MyScene extends CGFscene {
 
 
         // Objects connected to MyInterface
-        this.displayAxis = true;
+        this.displayAxis = false;
         this.displayMyCubeMap = true;
         this.displayFloor = true;
         this.displayFish = true;
@@ -120,6 +120,7 @@ export class MyScene extends CGFscene {
 
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
+        this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[0].setAmbient(1.0, 1.0, 1.0, 1.0);
         this.lights[0].enable();
