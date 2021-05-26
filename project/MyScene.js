@@ -93,8 +93,8 @@ export class MyScene extends CGFscene {
         this.waterSurf = new MyWaterSurface(this, 50);
         this.nest = new MyNest(this, 5, 0, -14);
         this.flora = new MyFlora(this, 20, { x: 0, z: -14, r: 5 });
-        this.myAnimatedFish1 = new MyAnimatedFish(this, -4, -4, 5, [0.1, 0.2, 0.7, 1.0], 0.4);
-        this.myAnimatedFish2 = new MyAnimatedFish(this, 5, 5, 10, [0.85, 0.2, 0.1, 1.0], 0.8);
+        this.myAnimatedFish1 = new MyAnimatedFish(this, -4, -10, 5, [0.1, 0.2, 0.7, 1.0], 0.4);
+        this.myAnimatedFish2 = new MyAnimatedFish(this, 5, 10, 10, [0.85, 0.2, 0.1, 1.0], 0.8);
         this.myAnimatedFish = [this.myAnimatedFish1, this.myAnimatedFish2]
 
         this.defaultAppearance = new CGFappearance(this);
