@@ -10,26 +10,25 @@ export class MyPier {
         this.xPosition = xPosition;
         this.yPosition = yPosition;
         this.zPosition = zPosition;
-
     }
 
     display() {
         this.scene.translate(this.xPosition, this.yPosition, this.zPosition);
         this.scene.pushMatrix();
 
-        //FrontRight
+        // FrontRight
         this.scene.translate(this.width/2,0,this.length/2);
         this.cyllinder.display();
 
-        //BackRight
+        // BackRight
         this.scene.translate(this.width/2,0,-this.length/2);
         this.cyllinder.display();
 
-        //FrontLeft
+        // FrontLeft
         this.scene.translate(-this.width/2,0,this.length/2);
         this.cyllinder.display();
 
-        //BackLeft
+        // BackLeft
         this.scene.translate(-this.width/2,0,-this.length/2);
         this.cyllinder.display();
 

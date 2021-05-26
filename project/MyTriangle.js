@@ -19,7 +19,7 @@ export class MyTriangle extends CGFobject {
         ];
         this.vertices = this.vertices.concat(this.vertices);
 
-        //Counter-clockwise reference of vertices
+        // Counter-clockwise reference of vertices
         this.indices = [
             0, 1, 2,
             5, 4, 3
@@ -28,8 +28,8 @@ export class MyTriangle extends CGFobject {
         this.normals = new Array(3).fill([0, 0, 1]).flat();
 		this.normals = this.normals.concat(new Array(3).fill([0, 0, -1]).flat());
 
-        //The defined indices (and corresponding vertices)
-        //will be read in groups of three to draw triangles
+        // The defined indices (and corresponding vertices)
+        // will be read in groups of three to draw triangles
         this.primitiveType = this.scene.gl.TRIANGLES;
 
         this.initGLBuffers();

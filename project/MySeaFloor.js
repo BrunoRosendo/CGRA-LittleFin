@@ -1,6 +1,5 @@
 import { CGFobject, CGFshader, CGFappearance, CGFtexture } from '../lib/CGF.js';
 import { MyPlane } from './MyPlane.js';
-import { MyRockSet } from './MyRockSet.js';
 /**
 * MyPlane
 * @constructor

@@ -9,7 +9,6 @@ export class MyNest extends CGFobject {
         this.posX = posX;
         this.posZ = posZ;
         this.radius = radius;
-        //this.rockset = new MyRockSet(scene, 500, radius);
         this.extraRocks = [];
         this.initNest();
     }
@@ -72,8 +71,6 @@ export class MyNest extends CGFobject {
     display() {
         this.scene.translate(this.posX, 0, this.posZ);
         this.scene.pushMatrix();
-
-        //this.rockset.display();
 
         this.elements.forEach(element => {
             this.scene.translate(element.x, 0, element.z);
