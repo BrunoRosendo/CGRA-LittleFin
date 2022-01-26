@@ -28,56 +28,56 @@
 
 <figure>
   <img
-  src="screenshots/proj-t07g01-1.png"
+  src="project/screenshots/proj-t07g01-1.png"
   alt="MyFish">
   <figcaption>Exercise 4 - MyFish</figcaption>
 </figure>
 
 <figure>
   <img
-  src="screenshots/proj-t07g01-2.png"
+  src="project/screenshots/proj-t07g01-2.png"
   alt="MyNest">
   <figcaption>Exercise 5.1 - MyNest</figcaption>
 </figure>
 
 <figure>
   <img
-  src="screenshots/proj-t07g01-3.png"
+  src="project/screenshots/proj-t07g01-3.png"
   alt="MyWaterSurface">
   <figcaption>Exercise 5.2 - Water Surface</figcaption>
 </figure>
 
 <figure>
   <img
-  src="screenshots/proj-t07g01-4.png"
+  src="project/screenshots/proj-t07g01-4.png"
   alt="MyRockSet">
   <figcaption>Exercise 5.3 - MyRock and MyRockSet</figcaption>
 </figure>
 
 <figure>
   <img
-  src="screenshots/proj-t07g01-5.png"
+  src="project/screenshots/proj-t07g01-5.png"
   alt="MyPier">
   <figcaption>Exercise 5.4 - MyPiller and MyPier</figcaption>
 </figure>
 
 <figure>
   <img
-  src="screenshots/proj-t07g01-6.png"
+  src="project/screenshots/proj-t07g01-6.png"
   alt="Other Elements">
   <figcaption>Exercise 5.4 - Other Elements</figcaption>
 </figure>
 
 <figure>
   <img
-  src="screenshots/proj-t07g01-7.png"
+  src="project/screenshots/proj-t07g01-7.png"
   alt="Transporting Stones">
   <figcaption>Exercise 6 - Transporting Stones</figcaption>
 </figure>
 
 <figure>
   <img
-  src="screenshots/proj-t07g01-7a.png"
+  src="project/screenshots/proj-t07g01-7a.png"
   alt="Stones in Nest">
   <figcaption>Exercise 6 - Stones Left in the Nest</figcaption>
 </figure>
@@ -91,14 +91,14 @@
 
 <figure>
   <img
-  src="screenshots/proj-t07g01-8a.png"
+  src="project/screenshots/proj-t07g01-8a.png"
   alt="MyFish">
   <figcaption>Exercise 7 - Random Algaes</figcaption>
 </figure>
 
 <figure>
   <img
-  src="screenshots/proj-t07g01-8b.png"
+  src="project/screenshots/proj-t07g01-8b.png"
   alt="FishShader">
   <figcaption>Exercise 7 - Improved Fish Shader</figcaption>
 </figure>
